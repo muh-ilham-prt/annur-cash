@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12503a" />
+  <title>Kas Sekolah — AN-NUR Islamic Fullday School</title>
+  <link rel="icon" href="https://www.annurifs.sch.id/wp-content/uploads/2020/09/cropped-SMALL-LOGO.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'], arabic: ['Amiri', 'serif'] },
+        colors: {
+          forest: { 50:'#effaf4',100:'#d8f3e3',200:'#b3e6cc',300:'#80d1ad',400:'#4ab788',500:'#269b6c',600:'#187d57',700:'#136447',800:'#12503a',900:'#0f4231',950:'#07271d' },
+          gold: { 200:'#f8e4a8',300:'#f3d27a',400:'#ecb94a',500:'#e0a026',600:'#c27f17' },
+          cream: '#fbf7ee'
+        }
+      } }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; }
+    body { background: #efe9da; -webkit-tap-highlight-color: transparent; }
+    #app { height: 100vh; height: 100dvh; }
+    .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { scrollbar-width: none; }
+    .safe-top { padding-top: max(env(safe-area-inset-top), 1.25rem); }
+    .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), .5rem); }
+    [hidden] { display: none !important; }
+    .tnum { font-variant-numeric: tabular-nums; }
+    .pattern { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.09'%3E%3Cpath d='M40 4l9 22 22-9-9 22 22 9-22 9 9 22-22-9-9 22-9-22-22 9 9-22-22-9 22-9-9-22 22 9z'/%3E%3C/g%3E%3C/svg%3E"); background-size: 80px 80px; }
+    @keyframes pop { 0% { transform: scale(.6); opacity: 0 } 70% { transform: scale(1.08) } 100% { transform: scale(1); opacity: 1 } }
+    @keyframes rise { from { transform: translateY(14px); opacity: 0 } to { transform: none; opacity: 1 } }
+    @keyframes load { from { width: 0 } to { width: 100% } }
+    @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
+    @keyframes sheet { from { transform: translateY(100%) } to { transform: none } }
+    .anim-pop { animation: pop .7s cubic-bezier(.2,.8,.2,1) both }
+    .anim-rise { animation: rise .6s ease-out both }
+    .anim-load { animation: load 1.8s ease-in-out forwards }
+    .anim-float { animation: float 6s ease-in-out infinite }
+    .anim-sheet { animation: sheet .3s cubic-bezier(.2,.8,.2,1) both }
+    .item-in { animation: rise .45s ease-out both }
+    .fade-out { opacity: 0; transform: scale(1.04); pointer-events: none; transition: all .45s ease }
+    :focus-visible { outline: 3px solid #ecb94a; outline-offset: 2px; }
+    .field { margin-top: .25rem; width: 100%; border-radius: .75rem; border: 1px solid #b3e6cc; background: #fff; padding: .75rem .875rem; font-size: .875rem; outline: none; }
+    .field:focus { border-color: #269b6c; box-shadow: 0 0 0 3px rgba(38,155,108,.2); }
+    .field[aria-invalid="true"] { border-color: #dc2626; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body class="font-sans text-slate-800">
+
+<div id="app" class="relative mx-auto max-w-[430px] overflow-hidden bg-cream shadow-2xl">
+
+  <!-- ============ SPLASH ============ -->
+  <section id="splash" class="absolute inset-0 z-[70] flex flex-col items-center justify-between overflow-hidden bg-gradient-to-b from-forest-700 via-forest-800 to-forest-950 text-white safe-top safe-bottom" aria-label="Memuat aplikasi">
+    <div class="pattern absolute inset-0"></div>
+    <div class="anim-float pointer-events-none absolute -left-16 top-24 h-52 w-52 rounded-full bg-white/10 blur-2xl"></div>
+    <div class="anim-float pointer-events-none absolute -right-20 bottom-40 h-64 w-64 rounded-full bg-gold-400/20 blur-3xl" style="animation-delay:-3s"></div>
+    <div></div>
+    <div class="relative flex flex-col items-center px-8 text-center">
+      <p class="anim-rise font-arabic text-2xl text-gold-300" lang="ar" dir="rtl">بسم الله الرحمن الرحيم</p>
+      <div class="anim-pop mt-6 flex h-24 w-24 items-center justify-center rounded-[28px] bg-white shadow-xl shadow-black/20">
+        <img src="https://www.annurifs.sch.id/wp-content/uploads/2020/09/cropped-SMALL-LOGO.png" alt="" class="h-16 w-16 object-contain" onerror="this.replaceWith(Object.assign(document.createElement('iconify-icon'),{icon:'solar:wallet-money-bold-duotone',width:'56',className:'text-forest-600'}))" />
+      </div>
+      <h1 class="anim-rise mt-6 font-display text-3xl font-bold tracking-tight" style="animation-delay:.3s">Kas Sekolah</h1>
+      <p class="anim-rise mt-1 text-xs font-bold uppercase tracking-[.2em] text-gold-300" style="animation-delay:.38s">AN-NUR Islamic Fullday School</p>
+      <p class="anim-rise mt-3 max-w-[270px] text-sm leading-relaxed text-white/75" style="animation-delay:.45s">Catat pembayaran siswa dengan mudah: lunas, setengah, atau kredit.</p>
+    </div>
+    <div class="anim-rise relative w-full px-12 pb-6" style="animation-delay:.6s">
+      <div class="h-1.5 w-full overflow-hidden rounded-full bg-white/20"><div class="anim-load h-full rounded-full bg-gold-400"></div></div>
+      <p class="mt-4 text-center text-xs text-white/60">Menyiapkan data sekolah…</p>
+      <p class="mt-1 text-center text-[11px] text-white/40">Ketuk untuk melewati</p>
+    </div>
+  </section>
+
+  <!-- ============ HALAMAN ============ -->
+  <div id="stage" class="absolute inset-0 flex flex-col bg-cream">
+
+    <!-- Beranda -->
+    <div id="v-home" class="no-scrollbar flex-1 overflow-y-auto pb-28" data-view>
+      <header class="relative overflow-hidden rounded-b-[32px] bg-gradient-to-br from-forest-700 to-forest-950 px-5 pb-24 text-white safe-top">
+        <div class="pattern pointer-events-none absolute inset-0"></div>
+        <div class="relative flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white p-1.5">
+              <img src="https://www.annurifs.sch.id/wp-content/uploads/2020/09/cropped-SMALL-LOGO.png" alt="" class="h-full w-full object-contain" onerror="this.replaceWith(Object.assign(document.createElement('iconify-icon'),{icon:'solar:buildings-2-bold-duotone',width:'26',className:'text-forest-700'}))" />
+            </div>
+            <div>
+              <p class="text-xs text-white/70" id="greeting">Assalamu’alaikum</p>
+              <p class="font-display text-base font-bold leading-tight">AN-NUR Islamic Fullday School</p>
+            </div>
+          </div>
+          <button id="bell" type="button" class="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 backdrop-blur transition active:scale-95" aria-label="Notifikasi">
+            <iconify-icon icon="solar:bell-bold-duotone" width="24" height="24"></iconify-icon>
+            <span id="bellDot" class="absolute right-2.5 top-2.5 hidden h-2.5 w-2.5 rounded-full bg-gold-400 ring-2 ring-forest-800"></span>
+          </button>
+        </div>
+        <div class="relative mt-6">
+          <p class="text-xs text-white/70">Terkumpul bulan ini</p>
+          <p class="mt-1 font-display text-3xl font-bold tracking-tight tnum" id="totalCollected">Rp 0</p>
+          <p class="mt-1 flex items-center gap-1 text-xs text-forest-200"><iconify-icon icon="solar:graph-up-bold" width="14"></iconify-icon><span id="todayInfo">+Rp 0 hari ini</span></p>
+        </div>
+      </header>
+
+      <section class="relative z-10 -mt-16 grid grid-cols-3 gap-3 px-5" aria-label="Ringkasan">
+        <div class="rounded-2xl bg-white p-3 shadow-lg shadow-forest-900/10 ring-1 ring-forest-100"><div class="flex h-8 w-8 items-center justify-center rounded-xl bg-forest-100 text-forest-700"><iconify-icon icon="solar:check-circle-bold" width="20"></iconify-icon></div><p class="mt-2 text-lg font-extrabold text-forest-900 tnum" id="statFull">0</p><p class="text-[11px] text-slate-500">Lunas</p></div>
+        <div class="rounded-2xl bg-white p-3 shadow-lg shadow-forest-900/10 ring-1 ring-forest-100"><div class="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-100 text-sky-700"><iconify-icon icon="solar:pie-chart-2-bold" width="20"></iconify-icon></div><p class="mt-2 text-lg font-extrabold text-forest-900 tnum" id="statHalf">0</p><p class="text-[11px] text-slate-500">Sebagian</p></div>
+        <div class="rounded-2xl bg-white p-3 shadow-lg shadow-forest-900/10 ring-1 ring-forest-100"><div class="flex h-8 w-8 items-center justify-center rounded-xl bg-gold-200 text-gold-600"><iconify-icon icon="solar:clock-circle-bold" width="20"></iconify-icon></div><p class="mt-2 text-lg font-extrabold text-forest-900 tnum" id="statCredit">0</p><p class="text-[11px] text-slate-500">Kredit</p></div>
+      </section>
+
+      <section class="mt-4 px-5">
+        <div class="flex items-center gap-3 rounded-2xl border border-gold-300 bg-gold-200/50 p-3.5">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold-300 text-forest-950"><iconify-icon icon="solar:danger-triangle-bold-duotone" width="24"></iconify-icon></div>
+          <div class="min-w-0 flex-1"><p class="text-xs font-semibold text-gold-600">Sisa tagihan</p><p class="text-base font-extrabold text-forest-950 tnum" id="totalOutstanding">Rp 0</p></div>
+          <button id="viewOutstanding" type="button" class="rounded-xl bg-forest-800 px-3 py-1.5 text-xs font-semibold text-white transition active:scale-95">Lihat</button>
+        </div>
+      </section>
+
+      <section class="mt-6 px-5">
+        <h2 class="mb-3 text-sm font-bold text-forest-900">Aksi cepat</h2>
+        <div class="grid grid-cols-4 gap-3" id="quickActions"></div>
+      </section>
+
+      <section class="mt-6">
+        <div class="mb-3 flex items-center justify-between px-5">
+          <h2 class="text-sm font-bold text-forest-900">Jenis pembayaran</h2>
+          <a href="#/jenis" class="flex items-center gap-1 text-xs font-semibold text-forest-600">Kelola <iconify-icon icon="solar:alt-arrow-right-linear" width="14"></iconify-icon></a>
+        </div>
+        <div class="no-scrollbar flex gap-3 overflow-x-auto px-5 pb-1" id="paymentTypes"></div>
+      </section>
+
+      <section id="recent" class="mt-6 px-5 scroll-mt-4">
+        <div class="mb-3 flex items-center justify-between">
+          <h2 class="text-sm font-bold text-forest-900">Pembayaran terbaru</h2>
+          <span id="listCount" class="text-xs font-semibold text-forest-600" aria-live="polite"></span>
+        </div>
+        <div class="no-scrollbar -mx-5 mb-3 flex gap-2 overflow-x-auto px-5" id="filters" role="group" aria-label="Filter pembayaran"></div>
+        <div class="space-y-3" id="recentPayments"></div>
+      </section>
+    </div>
+
+    <!-- Jenis Pembayaran -->
+    <div id="v-jenis" class="no-scrollbar flex-1 overflow-y-auto pb-28" data-view hidden>
+      <header class="relative overflow-hidden rounded-b-[32px] bg-gradient-to-br from-forest-700 to-forest-950 px-5 pb-20 text-white safe-top">
+        <div class="pattern pointer-events-none absolute inset-0"></div>
+        <div class="relative flex items-center gap-3">
+          <a href="#/" class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/15 backdrop-blur transition active:scale-95" aria-label="Kembali ke beranda"><iconify-icon icon="solar:alt-arrow-left-linear" width="22"></iconify-icon></a>
+          <div><h1 class="font-display text-xl font-bold leading-tight">Jenis Pembayaran</h1><p class="text-xs text-white/70">Atur jenis dan tarif yang ditagihkan ke siswa</p></div>
+        </div>
+      </header>
+      <section class="relative z-10 -mt-12 grid grid-cols-2 gap-3 px-5" aria-label="Ringkasan jenis pembayaran">
+        <div class="rounded-2xl bg-white p-3.5 shadow-lg shadow-forest-900/10 ring-1 ring-forest-100"><p class="text-[11px] text-slate-500">Jenis aktif</p><p class="mt-1 font-display text-2xl font-bold text-forest-900 tnum" id="tpActive">0</p></div>
+        <div class="rounded-2xl bg-white p-3.5 shadow-lg shadow-forest-900/10 ring-1 ring-forest-100"><p class="text-[11px] text-slate-500">Total terkumpul</p><p class="mt-1 font-display text-xl font-bold text-forest-900 tnum" id="tpCollected">Rp 0</p></div>
+      </section>
+      <section class="mt-5 px-5">
+        <ul class="space-y-3" id="typeList" aria-label="Daftar jenis pembayaran"></ul>
+        <div id="archivedWrap" class="mt-6" hidden>
+          <h2 class="mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">Diarsipkan</h2>
+          <ul class="space-y-3" id="archivedList"></ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- Siswa -->
+    <div id="v-laporan" class="no-scrollbar flex-1 overflow-y-auto pb-28" data-view hidden>
+      <header class="relative overflow-hidden rounded-b-[32px] bg-gradient-to-br from-forest-700 to-forest-950 px-5 pb-16 text-white safe-top">
+        <div class="pattern pointer-events-none absolute inset-0"></div>
+        <div class="relative flex items-center gap-3">
+          <a href="#/" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/15 backdrop-blur transition active:scale-95" aria-label="Kembali ke beranda"><iconify-icon icon="solar:alt-arrow-left-linear" width="22"></iconify-icon></a>
+          <div class="min-w-0 flex-1"><h1 class="font-display text-xl font-bold leading-tight">Laporan</h1><p class="text-xs text-white/70">Ringkasan penerimaan dan tunggakan</p></div>
+          <button type="button" id="rExport" class="flex h-10 shrink-0 items-center gap-1.5 rounded-2xl bg-gold-400 px-3 text-xs font-bold text-forest-950 transition active:scale-95"><iconify-icon icon="solar:download-minimalistic-bold" width="18"></iconify-icon>CSV</button>
+        </div>
+      </header>
+      <section class="relative z-10 -mt-9 px-5" aria-label="Periode">
+        <div id="rPeriod" class="no-scrollbar flex gap-2 overflow-x-auto rounded-2xl bg-white p-1.5 shadow-md ring-1 ring-forest-100" role="tablist"></div>
+      </section>
+      <section class="mt-4 grid grid-cols-2 gap-3 px-5" aria-label="Ringkasan">
+        <div class="col-span-2 rounded-2xl bg-forest-800 p-4 text-white"><p class="text-xs text-white/70">Uang diterima <span id="rLabel"></span></p><p id="rIn" class="mt-1 font-display text-2xl font-bold tnum"></p><p id="rInSub" class="mt-0.5 text-[11px] text-white/70"></p></div>
+        <div class="rounded-2xl bg-white p-4 ring-1 ring-forest-100"><p class="text-[11px] text-slate-500">Tagihan dibuat</p><p id="rBill" class="mt-1 text-base font-extrabold text-forest-900 tnum"></p></div>
+        <div class="rounded-2xl bg-[#fbefc9] p-4 ring-1 ring-gold-300"><p class="text-[11px] font-semibold text-forest-800">Total tunggakan</p><p id="rDue" class="mt-1 text-base font-extrabold text-forest-950 tnum"></p></div>
+      </section>
+      <section class="mt-5 px-5"><h2 class="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Per jenis pembayaran</h2><div id="rTypes" class="space-y-2"></div></section>
+      <section class="mt-5 px-5"><h2 class="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Per kelas</h2><div id="rClasses" class="overflow-hidden rounded-2xl bg-white ring-1 ring-forest-100"></div></section>
+      <section class="mt-5 px-5"><h2 class="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Tagihan belum lunas</h2><div id="rOpen" class="space-y-2"></div></section>
+    </div>
+
+    <div id="v-siswa" class="no-scrollbar flex-1 overflow-y-auto pb-28" data-view hidden>
+      <header class="relative overflow-hidden rounded-b-[32px] bg-gradient-to-br from-forest-700 to-forest-950 px-5 pb-16 text-white safe-top">
+        <div class="pattern pointer-events-none absolute inset-0"></div>
+        <div class="relative flex items-center gap-3">
+          <a href="#/" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/15 backdrop-blur transition active:scale-95" aria-label="Kembali ke beranda"><iconify-icon icon="solar:alt-arrow-left-linear" width="22"></iconify-icon></a>
+          <div class="min-w-0 flex-1"><h1 class="font-display text-xl font-bold leading-tight">Siswa</h1><p class="text-xs text-white/70">Data siswa dan tagihannya</p></div>
+        </div>
+        <label class="relative mt-4 block"><span class="sr-only">Cari siswa</span>
+          <iconify-icon icon="solar:magnifer-linear" width="20" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/70"></iconify-icon>
+          <input id="stSearch" type="search" placeholder="Cari nama, kelas, atau NIS…" autocomplete="off" class="w-full rounded-2xl bg-white/15 py-3 pl-11 pr-4 text-sm text-white placeholder-white/60 outline-none backdrop-blur focus:bg-white/25" />
+        </label>
+        <div class="relative mt-3 grid grid-cols-2 gap-2">
+          <button type="button" id="addStudent" class="flex items-center justify-center gap-2 rounded-2xl bg-gold-400 py-3 text-sm font-bold text-forest-950 transition active:scale-[.98]"><iconify-icon icon="solar:user-plus-bold" width="20"></iconify-icon>Tambah siswa</button>
+          <button type="button" id="openImport" class="flex items-center justify-center gap-2 rounded-2xl bg-white/15 py-3 text-sm font-bold backdrop-blur transition active:scale-[.98]"><iconify-icon icon="solar:upload-minimalistic-bold" width="20"></iconify-icon>Impor Excel</button>
+        </div>
+      </header>
+      <section class="relative z-10 -mt-8 grid grid-cols-2 gap-3 px-5" aria-label="Ringkasan siswa">
+        <div class="rounded-2xl bg-white p-3.5 shadow-lg shadow-forest-900/10 ring-1 ring-forest-100"><p class="text-[11px] text-slate-500">Total siswa</p><p class="mt-1 font-display text-2xl font-bold text-forest-900 tnum" id="stCount">0</p></div>
+        <div class="rounded-2xl bg-[#fbefc9] p-3.5 shadow-lg shadow-forest-900/10 ring-1 ring-gold-300"><p class="text-[11px] font-semibold text-forest-800">Punya tagihan</p><p class="mt-1 font-display text-2xl font-bold text-forest-950 tnum" id="stDue">0</p></div>
+      </section>
+      <div class="no-scrollbar mt-4 flex gap-2 overflow-x-auto px-5" id="stChips" role="group" aria-label="Saring siswa"></div>
+      <section class="mt-4 px-5" id="studentList" aria-label="Daftar siswa" aria-live="polite"></section>
+    </div>
+
+    <button id="fab" type="button" class="absolute bottom-24 right-5 z-20 flex h-14 w-14 items-center justify-center rounded-2xl bg-gold-400 text-forest-950 shadow-xl shadow-gold-600/30 transition active:scale-95" aria-label="Catat pembayaran">
+      <iconify-icon icon="solar:add-circle-bold" width="32" height="32"></iconify-icon>
+    </button>
+
+    <nav class="absolute inset-x-0 bottom-0 z-10 border-t border-forest-100 bg-white/95 backdrop-blur safe-bottom" aria-label="Navigasi utama">
+      <ul class="flex items-center justify-around px-2 pt-2" id="bottomNav"></ul>
+    </nav>
+
+    <div id="toast" role="status" aria-live="polite" class="pointer-events-none absolute left-1/2 top-6 z-[60] max-w-[90%] -translate-x-1/2 -translate-y-24 rounded-full bg-forest-950 px-4 py-2 text-center text-xs font-medium text-white shadow-lg transition-transform duration-300"></div>
+
+    <!-- ============ LEMBAR (bottom sheet) ============ -->
+    <div id="sheetWrap" class="absolute inset-0 z-50 hidden bg-forest-950/60" aria-hidden="true">
+
+      <!-- Catat pembayaran -->
+      <form id="f-pay" class="anim-sheet absolute inset-x-0 bottom-0 max-h-[92%] overflow-y-auto rounded-t-[28px] bg-cream p-5 safe-bottom" role="dialog" aria-modal="true" aria-labelledby="t-pay" novalidate hidden>
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200"></div>
+        <div class="flex items-center justify-between"><h2 id="t-pay" class="font-display text-xl font-bold text-forest-900">Catat pembayaran</h2><button type="button" data-close class="flex h-9 w-9 items-center justify-center rounded-full bg-white ring-1 ring-forest-100" aria-label="Tutup"><iconify-icon icon="solar:close-circle-bold" width="22"></iconify-icon></button></div>
+        <div class="mt-4 space-y-4">
+          <div>
+            <div class="flex items-center justify-between"><label for="pStudent" class="text-xs font-bold text-forest-900">Siswa</label><button type="button" id="pNewStudent" class="text-xs font-bold text-forest-600">+ Siswa baru</button></div>
+            <select id="pStudent" class="field" aria-describedby="ePStudent"></select>
+            <p id="ePStudent" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+          </div>
+          <div>
+            <label for="pType" class="text-xs font-bold text-forest-900">Jenis pembayaran</label>
+            <select id="pType" class="field" aria-describedby="ePType"></select>
+            <p id="ePType" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+          </div>
+          <p id="pOpenNote" class="hidden rounded-xl bg-gold-200/60 p-3 text-xs text-forest-950"></p>
+          <div>
+            <label for="pAmount" class="text-xs font-bold text-forest-900">Jumlah dibayar</label>
+            <div class="relative"><span class="pointer-events-none absolute left-3.5 top-1/2 mt-0.5 -translate-y-1/2 text-sm font-bold text-slate-400">Rp</span><input id="pAmount" inputmode="numeric" autocomplete="off" placeholder="0" class="field !pl-10 tnum" aria-describedby="ePAmount pHint" /></div>
+            <div class="mt-2 flex items-center justify-between gap-2"><p id="pHint" class="text-[11px] text-slate-500">Isi 0 bila belum membayar (dicatat sebagai kredit).</p><button type="button" id="pFull" class="shrink-0 rounded-full bg-white px-3 py-1 text-xs font-bold text-forest-800 ring-1 ring-forest-200">Bayar lunas</button></div>
+            <p id="ePAmount" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-forest-900">Bukti pembayaran (foto) <span id="pProofReq" class="font-normal text-slate-500">· wajib bila jumlah lebih dari 0</span></p>
+            <div id="pProofEmpty" class="mt-1 grid grid-cols-2 gap-2">
+              <button type="button" id="pCam" class="flex flex-col items-center gap-1 rounded-2xl border-2 border-dashed border-forest-300 bg-white py-4 text-xs font-bold text-forest-800"><iconify-icon icon="solar:camera-bold" width="26" class="text-forest-600"></iconify-icon>Ambil foto</button>
+              <button type="button" id="pPick" class="flex flex-col items-center gap-1 rounded-2xl border-2 border-dashed border-forest-300 bg-white py-4 text-xs font-bold text-forest-800"><iconify-icon icon="solar:gallery-bold" width="26" class="text-forest-600"></iconify-icon>Dari galeri</button>
+            </div>
+            <div id="pProofView" class="mt-1" hidden>
+              <img id="pProofImg" alt="Pratinjau foto bukti pembayaran" class="h-44 w-full rounded-2xl object-cover ring-1 ring-forest-200" />
+              <div class="mt-2 grid grid-cols-2 gap-2"><button type="button" id="pRetake" class="rounded-xl bg-white py-2.5 text-xs font-bold text-forest-800 ring-1 ring-forest-200">Ganti foto</button><button type="button" id="pRemove" class="rounded-xl bg-white py-2.5 text-xs font-bold text-red-600 ring-1 ring-red-200">Hapus foto</button></div>
+            </div>
+            <input type="file" id="pFileCam" accept="image/*" capture="environment" class="hidden" />
+            <input type="file" id="pFilePick" accept="image/*" class="hidden" />
+            <p id="ePProof" class="mt-1 hidden text-xs font-semibold text-red-600" role="alert"></p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 ring-1 ring-forest-100" aria-live="polite">
+            <div class="flex justify-between text-sm"><span class="text-slate-500" id="sumLabel">Tagihan</span><b id="sumPrice" class="tnum">Rp 0</b></div>
+            <div class="mt-1 flex justify-between text-sm"><span class="text-slate-500">Dibayar sekarang</span><b id="sumPaid" class="tnum text-forest-700">Rp 0</b></div>
+            <div class="mt-1 flex items-center justify-between border-t border-forest-100 pt-2 text-sm"><span class="text-slate-500">Sisa</span><span class="flex items-center gap-2"><span id="sumStatus"></span><b id="sumRest" class="tnum text-gold-600">Rp 0</b></span></div>
+          </div>
+        </div>
+        <button type="submit" id="pSubmit" class="mt-5 w-full rounded-2xl bg-forest-800 py-3.5 text-sm font-bold text-white transition active:scale-[.98] disabled:opacity-50">Simpan pembayaran</button>
+      </form>
+
+      <!-- Jenis pembayaran: tambah / ubah -->
+      <form id="f-type" class="anim-sheet absolute inset-x-0 bottom-0 max-h-[92%] overflow-y-auto rounded-t-[28px] bg-cream p-5 safe-bottom" role="dialog" aria-modal="true" aria-labelledby="t-type" novalidate hidden>
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200"></div>
+        <div class="flex items-center justify-between"><h2 id="t-type" class="font-display text-xl font-bold text-forest-900">Jenis pembayaran baru</h2><button type="button" data-close class="flex h-9 w-9 items-center justify-center rounded-full bg-white ring-1 ring-forest-100" aria-label="Tutup"><iconify-icon icon="solar:close-circle-bold" width="22"></iconify-icon></button></div>
+        <div class="mt-4 space-y-4">
+          <div>
+            <label for="tName" class="text-xs font-bold text-forest-900">Nama</label>
+            <input id="tName" maxlength="40" autocomplete="off" placeholder="mis. SPP Bulanan" class="field" aria-describedby="eTName" />
+            <p id="eTName" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+          </div>
+          <div>
+            <label for="tPrice" class="text-xs font-bold text-forest-900">Harga (tarif)</label>
+            <div class="relative"><span class="pointer-events-none absolute left-3.5 top-1/2 mt-0.5 -translate-y-1/2 text-sm font-bold text-slate-400">Rp</span><input id="tPrice" inputmode="numeric" autocomplete="off" placeholder="350.000" class="field !pl-10 tnum" aria-describedby="eTPrice tHalf" /></div>
+            <p id="tHalf" class="mt-1 text-[11px] text-slate-500"></p>
+            <p id="eTPrice" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+          </div>
+          <fieldset>
+            <legend class="text-xs font-bold text-forest-900">Ikon</legend>
+            <div class="mt-1 grid grid-cols-4 gap-2" id="tIcons"></div>
+          </fieldset>
+          <p id="tNote" class="hidden rounded-xl bg-gold-200/60 p-3 text-xs text-forest-950">Mengubah harga hanya berlaku untuk pembayaran berikutnya. Pembayaran yang sudah dicatat tetap memakai harga saat dicatat.</p>
+        </div>
+        <button type="submit" class="mt-5 w-full rounded-2xl bg-forest-800 py-3.5 text-sm font-bold text-white transition active:scale-[.98]">Simpan</button>
+        <div id="tDanger" class="mt-3 grid grid-cols-1 gap-2" hidden>
+          <button type="button" id="tArchive" class="w-full rounded-2xl bg-white py-3 text-sm font-bold text-forest-800 ring-1 ring-forest-200"></button>
+          <button type="button" id="tDelete" class="w-full rounded-2xl bg-white py-3 text-sm font-bold text-red-600 ring-1 ring-red-200">Hapus jenis pembayaran</button>
+        </div>
+      </form>
+
+      <!-- Siswa: tambah / ubah -->
+      <form id="f-student" class="anim-sheet absolute inset-x-0 bottom-0 max-h-[92%] overflow-y-auto rounded-t-[28px] bg-cream p-5 safe-bottom" role="dialog" aria-modal="true" aria-labelledby="t-student" novalidate hidden>
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200"></div>
+        <div class="flex items-center justify-between"><h2 id="t-student" class="font-display text-xl font-bold text-forest-900">Siswa baru</h2><button type="button" data-close class="flex h-9 w-9 items-center justify-center rounded-full bg-white ring-1 ring-forest-100" aria-label="Tutup"><iconify-icon icon="solar:close-circle-bold" width="22"></iconify-icon></button></div>
+        <div class="mt-4 space-y-4">
+          <div>
+            <label for="sName" class="text-xs font-bold text-forest-900">Nama lengkap</label>
+            <input id="sName" maxlength="60" autocomplete="off" class="field" aria-describedby="eSName" />
+            <p id="eSName" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="sCls" class="text-xs font-bold text-forest-900">Kelas</label>
+              <input id="sCls" maxlength="3" autocomplete="off" placeholder="5A" class="field uppercase" aria-describedby="eSCls" />
+              <p id="eSCls" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+            </div>
+            <div>
+              <label for="sNis" class="text-xs font-bold text-forest-900">NIS <span class="font-normal text-slate-400">(opsional)</span></label>
+              <input id="sNis" maxlength="16" inputmode="numeric" autocomplete="off" class="field" aria-describedby="eSNis" />
+              <p id="eSNis" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="mt-5 w-full rounded-2xl bg-forest-800 py-3.5 text-sm font-bold text-white transition active:scale-[.98]">Simpan siswa</button>
+        <button type="submit" id="sAgain" data-again="1" class="mt-2 w-full rounded-2xl bg-white py-3 text-sm font-bold text-forest-800 ring-1 ring-forest-200">Simpan &amp; tambah lagi</button>
+        <button type="button" id="sDelete" class="mt-3 hidden w-full rounded-2xl bg-white py-3 text-sm font-bold text-red-600 ring-1 ring-red-200">Hapus siswa</button>
+      </form>
+
+      <!-- Rincian siswa -->
+      <section id="f-detail" class="anim-sheet absolute inset-x-0 bottom-0 max-h-[92%] overflow-y-auto rounded-t-[28px] bg-cream p-5 safe-bottom" role="dialog" aria-modal="true" aria-labelledby="t-detail" hidden>
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200"></div>
+        <div class="flex items-start justify-between gap-3"><div class="min-w-0"><h2 id="t-detail" class="truncate font-display text-xl font-bold text-forest-900"></h2><p id="dSub" class="text-xs text-slate-500"></p></div><button type="button" data-close class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-forest-100" aria-label="Tutup"><iconify-icon icon="solar:close-circle-bold" width="22"></iconify-icon></button></div>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div class="rounded-2xl bg-white p-3.5 ring-1 ring-forest-100"><p class="text-[11px] text-slate-500">Sudah dibayar</p><p class="mt-1 font-display text-lg font-bold text-forest-800 tnum" id="dPaid"></p></div>
+          <div class="rounded-2xl bg-gold-200/50 p-3.5 ring-1 ring-gold-300"><p class="text-[11px] text-gold-600 font-semibold">Sisa tagihan</p><p class="mt-1 font-display text-lg font-bold text-forest-950 tnum" id="dRest"></p></div>
+        </div>
+        <h3 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Riwayat pembayaran</h3>
+        <ul class="space-y-2" id="dList"></ul>
+        <div class="mt-5 grid grid-cols-2 gap-2">
+          <button type="button" id="dEdit" class="rounded-2xl bg-white py-3 text-sm font-bold text-forest-800 ring-1 ring-forest-200">Ubah data</button>
+          <button type="button" id="dPay" class="rounded-2xl bg-forest-800 py-3 text-sm font-bold text-white">Catat pembayaran</button>
+        </div>
+      </section>
+
+      <!-- Rincian tagihan -->
+      <section id="f-bill" class="anim-sheet absolute inset-x-0 bottom-0 max-h-[92%] overflow-y-auto rounded-t-[28px] bg-cream p-5 safe-bottom" role="dialog" aria-modal="true" aria-labelledby="t-bill" hidden>
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200"></div>
+        <div class="flex items-start justify-between gap-3"><div class="min-w-0"><h2 id="t-bill" class="truncate font-display text-xl font-bold text-forest-900"></h2><p id="bSub" class="text-xs text-slate-500"></p></div><button type="button" data-close class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-forest-100" aria-label="Tutup"><iconify-icon icon="solar:close-circle-bold" width="22"></iconify-icon></button></div>
+        <div class="mt-4 grid grid-cols-3 gap-2 text-center">
+          <div class="rounded-2xl bg-white p-3 ring-1 ring-forest-100"><p class="text-[10px] text-slate-500">Tagihan</p><p class="mt-1 text-sm font-extrabold text-forest-900 tnum" id="bPrice"></p></div>
+          <div class="rounded-2xl bg-white p-3 ring-1 ring-forest-100"><p class="text-[10px] text-slate-500">Dibayar</p><p class="mt-1 text-sm font-extrabold text-forest-800 tnum" id="bPaid"></p></div>
+          <div class="rounded-2xl bg-gold-200/60 p-3 ring-1 ring-gold-300"><p class="text-[10px] font-semibold text-forest-800">Sisa</p><p class="mt-1 text-sm font-extrabold text-forest-950 tnum" id="bRest"></p></div>
+        </div>
+        <p class="mt-3" id="bStatus"></p>
+        <h3 class="mt-5 mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">Riwayat pembayaran</h3>
+        <ul class="space-y-2" id="bList"></ul>
+        <button type="button" id="bPay" class="mt-5 w-full rounded-2xl bg-forest-800 py-3.5 text-sm font-bold text-white">Bayar sisa tagihan</button>
+      </section>
+
+      <!-- Foto bukti -->
+      <section id="f-proof" class="anim-sheet absolute inset-x-0 bottom-0 max-h-[92%] overflow-y-auto rounded-t-[28px] bg-cream p-5 safe-bottom" role="dialog" aria-modal="true" aria-labelledby="t-proof" hidden>
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200"></div>
+        <div class="flex items-center justify-between"><h2 id="t-proof" class="font-display text-xl font-bold text-forest-900">Foto bukti</h2><button type="button" data-close class="flex h-9 w-9 items-center justify-center rounded-full bg-white ring-1 ring-forest-100" aria-label="Tutup"><iconify-icon icon="solar:close-circle-bold" width="22"></iconify-icon></button></div>
+        <p id="prInfo" class="mt-1 text-xs text-slate-500"></p>
+        <div class="mt-3 overflow-hidden rounded-2xl bg-forest-950/5 ring-1 ring-forest-100"><img id="prImg" alt="Foto bukti pembayaran" class="max-h-[60vh] w-full object-contain" /></div>
+        <p id="prMissing" class="mt-3 hidden rounded-xl bg-gold-200/60 p-3 text-xs text-forest-950">Foto tidak ditemukan di perangkat ini.</p>
+        <button type="button" id="prBack" class="mt-4 w-full rounded-2xl bg-white py-3 text-sm font-bold text-forest-800 ring-1 ring-forest-200">Kembali</button>
+      </section>
+
+      <!-- Impor siswa (xlsx / csv) -->
+      <section id="f-import" class="anim-sheet absolute inset-x-0 bottom-0 flex max-h-[92%] flex-col rounded-t-[28px] bg-cream p-5 safe-bottom" role="dialog" aria-modal="true" aria-labelledby="t-import" hidden>
+        <div class="mx-auto mb-4 h-1.5 w-12 shrink-0 rounded-full bg-forest-200"></div>
+        <div class="flex shrink-0 items-center justify-between"><h2 id="t-import" class="font-display text-xl font-bold text-forest-900">Impor siswa dari Excel</h2><button type="button" data-close class="flex h-9 w-9 items-center justify-center rounded-full bg-white ring-1 ring-forest-100" aria-label="Tutup"><iconify-icon icon="solar:close-circle-bold" width="22"></iconify-icon></button></div>
+
+        <div id="iStep1" class="mt-4 overflow-y-auto">
+          <label id="iDrop" for="iFile" class="flex cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-forest-300 bg-white p-7 text-center transition hover:bg-forest-50">
+            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-forest-100 text-forest-700"><iconify-icon icon="solar:file-text-bold-duotone" width="28"></iconify-icon></span>
+            <b class="text-sm text-forest-900">Pilih berkas .xlsx</b>
+            <span class="text-xs text-slate-500">atau seret berkas ke sini (maks. 2 MB, 2.000 baris). CSV juga bisa.</span>
+            <input id="iFile" type="file" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" class="sr-only" />
+          </label>
+          <p id="iErr" class="mt-3 hidden rounded-xl bg-red-50 p-3 text-xs font-semibold text-red-700" role="alert"></p>
+          <div class="mt-4 rounded-2xl bg-white p-4 text-xs text-slate-600 ring-1 ring-forest-100">
+            <p class="font-bold text-forest-900">Format kolom (baris pertama sebagai judul)</p>
+            <ul class="mt-2 space-y-1"><li><b>Nama</b>: wajib, 3–60 karakter</li><li><b>Kelas</b>: wajib, 1–6 dan huruf, mis. 5A</li><li><b>NIS</b>: opsional, angka</li></ul>
+            <button type="button" id="iTemplate" class="mt-3 inline-flex items-center gap-1.5 font-bold text-forest-700"><iconify-icon icon="solar:download-minimalistic-bold" width="16"></iconify-icon>Unduh templat Excel</button>
+          </div>
+        </div>
+
+        <div id="iStep2" class="mt-4 flex min-h-0 flex-1 flex-col" hidden>
+          <p class="truncate text-xs text-slate-500" id="iFileName"></p>
+          <div class="mt-2 grid shrink-0 grid-cols-3 gap-2 text-center">
+            <div class="rounded-xl bg-forest-100 p-2.5"><b class="block font-display text-lg text-forest-800 tnum" id="iNew">0</b><span class="text-[10px] font-semibold text-forest-800">Baru</span></div>
+            <div class="rounded-xl bg-gold-200 p-2.5"><b class="block font-display text-lg text-forest-950 tnum" id="iDup">0</b><span class="text-[10px] font-semibold text-gold-600">Dilewati</span></div>
+            <div class="rounded-xl bg-red-100 p-2.5"><b class="block font-display text-lg text-red-700 tnum" id="iBad">0</b><span class="text-[10px] font-semibold text-red-700">Tidak valid</span></div>
+          </div>
+          <ul class="mt-3 min-h-0 flex-1 space-y-1.5 overflow-y-auto" id="iList" aria-label="Pratinjau data"></ul>
+          <div class="mt-4 grid shrink-0 grid-cols-2 gap-2">
+            <button type="button" id="iBack" class="rounded-2xl bg-white py-3 text-sm font-bold text-forest-800 ring-1 ring-forest-200">Pilih ulang</button>
+            <button type="button" id="iGo" class="rounded-2xl bg-forest-800 py-3 text-sm font-bold text-white disabled:opacity-40">Impor</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Konfirmasi -->
+      <section id="f-confirm" class="anim-sheet absolute inset-x-0 bottom-0 rounded-t-[28px] bg-cream p-5 safe-bottom" role="alertdialog" aria-modal="true" aria-labelledby="t-confirm" aria-describedby="m-confirm" hidden>
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200"></div>
+        <h2 id="t-confirm" class="font-display text-xl font-bold text-forest-900"></h2>
+        <p id="m-confirm" class="mt-2 text-sm text-slate-600"></p>
+        <div class="mt-5 grid grid-cols-2 gap-2">
+          <button type="button" id="cNo" class="rounded-2xl bg-white py-3 text-sm font-bold text-forest-800 ring-1 ring-forest-200">Batal</button>
+          <button type="button" id="cYes" class="rounded-2xl bg-red-600 py-3 text-sm font-bold text-white">Hapus</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (s, r = document) => r.querySelector(s);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const rupiah = (n) => 'Rp ' + Math.round(n).toLocaleString('id-ID');
+  const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
+
+  /* ---------- Penyimpanan (localStorage; ganti dengan API sekolah) ---------- */
+  const P = 'annur_kas_v2:';
+  const read = (k, d) => { try { const v = localStorage.getItem(P + k); return v ? JSON.parse(v) : d; } catch { return d; } };
+  const write = (k, v) => { try { localStorage.setItem(P + k, JSON.stringify(v)); } catch {} };
+
+  /* ---------- Model ----------
+     types:    { id, name, price, icon, archived }
+     students: { id, name, cls, nis }
+     payments: { id, studentId, typeId, price (harga saat dicatat), paid (jumlah semua cicilan), ts, entries: [{ id, amount, ts, proof }] }
+     Status dihitung dari paid dan price: Lunas bila sama, Sebagian bila kurang, Kredit bila 0. Bukti foto disimpan di IndexedDB (kunci = id entry).
+     Setiap pembayaran PASTI terkait satu siswa (studentId) dan satu jenis (typeId). */
+  const ICONS = [
+    ['solar:book-bookmark-bold-duotone', 'bg-forest-100 text-forest-700', 'Buku'], ['solar:t-shirt-bold-duotone', 'bg-gold-200 text-gold-600', 'Seragam'],
+    ['solar:bus-bold-duotone', 'bg-sky-100 text-sky-700', 'Bus'], ['solar:notebook-bold-duotone', 'bg-rose-100 text-rose-700', 'Catatan'],
+    ['solar:document-text-bold-duotone', 'bg-violet-100 text-violet-700', 'Dokumen'], ['solar:cup-star-bold-duotone', 'bg-gold-200 text-gold-600', 'Prestasi'],
+    ['solar:heart-bold-duotone', 'bg-rose-100 text-rose-700', 'Infak'], ['solar:tag-price-bold-duotone', 'bg-forest-100 text-forest-700', 'Lainnya']
+  ];
+  const iconTone = (icon) => (ICONS.find((i) => i[0] === icon) || ICONS[7])[1];
+  const STATUS = {
+    full:   { label: 'Lunas',    cls: 'bg-forest-100 text-forest-800', icon: 'solar:check-circle-bold' },
+    part:   { label: 'Sebagian', cls: 'bg-sky-100 text-sky-800',       icon: 'solar:pie-chart-2-bold' },
+    credit: { label: 'Kredit',   cls: 'bg-gold-200 text-gold-600',     icon: 'solar:clock-circle-bold' }
+  };
+  const statusOf = (p) => (p.price > 0 && p.paid >= p.price ? 'full' : p.paid > 0 ? 'part' : 'credit');
+
+  const ago = (d, h, m) => { const x = new Date(); x.setDate(x.getDate() - d); x.setHours(h, m, 0, 0); return x.getTime(); };
+  function seed() {
+    const types = [
+      { id: 't1', name: 'SPP', price: 350000, icon: ICONS[0][0], archived: false }, { id: 't2', name: 'Seragam', price: 450000, icon: ICONS[1][0], archived: false },
+      { id: 't3', name: 'Wisata Edukasi', price: 150000, icon: ICONS[2][0], archived: false }, { id: 't4', name: 'Buku', price: 275000, icon: ICONS[3][0], archived: false },
+      { id: 't5', name: 'Biaya Ujian', price: 100000, icon: ICONS[4][0], archived: false }
+    ];
+    const students = [['s1', 'Aisyah Putri', '5A'], ['s2', 'Raka Pratama', '4B'], ['s3', 'Dewi Lestari', '6C'], ['s4', 'Bima Saputra', '3A'], ['s5', 'Nadia Rahma', '5B'], ['s6', 'Fajar Nugroho', '6A']]
+      .map(([id, name, cls]) => ({ id, name, cls, nis: '' }));
+    const pay = (id, s, t, amount, d, h, m) => { const price = types.find((x) => x.id === t).price, ts = ago(d, h, m); return { id, studentId: s, typeId: t, price, paid: amount, ts, entries: amount ? [{ id: id + 'e1', amount, ts, proof: false }] : [] }; };
+    return { types, students, payments: [pay('p1', 's1', 't1', 350000, 0, 9, 12), pay('p2', 's2', 't2', 225000, 0, 8, 40), pay('p3', 's3', 't3', 0, 1, 10, 5), pay('p4', 's4', 't4', 275000, 1, 9, 30), pay('p5', 's5', 't1', 175000, 2, 11, 0), pay('p6', 's6', 't5', 0, 2, 8, 15)] };
+  }
+  /* Migrasi dari versi lama (pembayaran menyimpan nama siswa sebagai teks) */
+  function migrate() {
+    try {
+      const old = JSON.parse(localStorage.getItem('annur_kas_v1:payments') || 'null');
+      if (!Array.isArray(old) || !old.length) return null;
+      const s = seed(), students = [], payments = [];
+      old.forEach((o) => {
+        if (!o || !o.student) return;
+        let st = students.find((x) => x.name.toLowerCase() === String(o.student).toLowerCase() && x.cls === o.cls);
+        if (!st) { st = { id: uid(), name: String(o.student), cls: String(o.cls || ''), nis: '' }; students.push(st); }
+        const t = s.types.find((x) => x.id === 't' + o.typeId) || s.types[0];
+        payments.push({ id: uid(), studentId: st.id, typeId: t.id, price: t.price, paid: Number(o.paid) || 0, ts: o.ts || Date.now() });
+      });
+      return payments.length ? { types: s.types, students, payments } : null;
+    } catch { return null; }
+  }
+  const valid = (d) => d && Array.isArray(d.types) && Array.isArray(d.students) && Array.isArray(d.payments);
+  let DB = { types: read('types', null), students: read('students', null), payments: read('payments', null) };
+  if (!valid(DB)) DB = migrate() || seed();
+  /* Normalisasi data lama: buang 'mode', buat riwayat cicilan (entries) dan hitung ulang paid */
+  DB.payments.forEach((p) => {
+    if (!Array.isArray(p.entries)) p.entries = Number(p.paid) > 0 ? [{ id: uid(), amount: Number(p.paid), ts: p.ts, proof: false }] : [];
+    p.paid = p.entries.reduce((a, e) => a + e.amount, 0); delete p.mode;
+  });
+  const save = () => { write('types', DB.types); write('students', DB.students); write('payments', DB.payments); };
+  save();
+
+  /* ---------- Foto bukti (IndexedDB) ---------- */
+  const Proofs = (() => {
+    const mem = new Map(); let dbp = null;
+    const open = () => dbp || (dbp = new Promise((res, rej) => { try { const r = indexedDB.open('annur_kas_proofs', 1); r.onupgradeneeded = () => r.result.createObjectStore('p'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); } catch (e) { rej(e); } }));
+    const run = async (mode, fn) => { const db = await open(); return new Promise((res, rej) => { const t = db.transaction('p', mode), req = fn(t.objectStore('p')); t.oncomplete = () => res(req.result); t.onerror = t.onabort = () => rej(t.error); }); };
+    return {
+      async put(id, blob) { try { await run('readwrite', (s) => s.put(blob, id)); return true; } catch { mem.set(id, blob); return false; } },
+      async get(id) { if (mem.has(id)) return mem.get(id); try { return (await run('readonly', (s) => s.get(id))) || null; } catch { return null; } }
+    };
+  })();
+  /* Foto dikecilkan (maks. 1280 px) dan disimpan ulang sebagai JPEG; ini juga membuang data lokasi (EXIF). */
+  async function prepareImage(file) {
+    if (!file || !/^image\//.test(file.type)) throw new Error('Pilih berkas gambar (foto).');
+    if (file.size > 15 * 1024 * 1024) throw new Error('Ukuran foto maksimal 15 MB.');
+    let bmp; try { bmp = await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch { throw new Error('Foto tidak bisa dibaca. Coba foto lain.'); }
+    const k = Math.min(1, 1280 / Math.max(bmp.width, bmp.height)), c = document.createElement('canvas');
+    c.width = Math.max(1, Math.round(bmp.width * k)); c.height = Math.max(1, Math.round(bmp.height * k));
+    const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(bmp, 0, 0, c.width, c.height); bmp.close && bmp.close();
+    const blob = await new Promise((r) => c.toBlob(r, 'image/jpeg', 0.8));
+    if (!blob) throw new Error('Foto gagal diproses.'); return blob;
+  }
+  const urls = []; const objUrl = (b) => { const u = URL.createObjectURL(b); urls.push(u); return u; };
+  const revokeUrls = () => { while (urls.length) URL.revokeObjectURL(urls.pop()); };
+
+  /* ---------- Helper ---------- */
+  const typeOf = (id) => DB.types.find((t) => t.id === id) || { id, name: 'Jenis dihapus', price: 0, icon: ICONS[7][0], archived: true };
+  const studentOf = (id) => DB.students.find((s) => s.id === id) || { id, name: 'Siswa dihapus', cls: '–', nis: '' };
+  const rest = (p) => Math.max(p.price - p.paid, 0);
+  const initials = (n) => String(n).trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+  const sameDay = (a, b) => new Date(a).toDateString() === new Date(b).toDateString();
+  const when = (ts) => {
+    const d = new Date(ts), hm = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace('.', ':');
+    if (sameDay(ts, Date.now())) return 'Hari ini, ' + hm;
+    if (sameDay(ts, Date.now() - 864e5)) return 'Kemarin, ' + hm;
+    return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+  };
+  const digits = (s) => String(s || '').replace(/\D/g, '');
+  const classKey = (c) => String(c || '').toUpperCase();
+  let toastT;
+  function toast(msg) { const t = $('#toast'); t.textContent = msg; t.style.transform = 'translate(-50%, 0)'; clearTimeout(toastT); toastT = setTimeout(() => { t.style.transform = 'translate(-50%, -6rem)'; }, 2200); }
+  const setErr = (id, msg, inputId) => { const e = $('#' + id); e.textContent = msg || ''; e.classList.toggle('hidden', !msg); if (inputId) $('#' + inputId).setAttribute('aria-invalid', msg ? 'true' : 'false'); return !!msg; };
+
+  /* ---------- Beranda ---------- */
+  const QUICK = [
+    ['record', 'Catat bayar', 'solar:hand-money-bold-duotone', 'bg-forest-100 text-forest-700'], ['student', 'Tambah siswa', 'solar:user-plus-bold-duotone', 'bg-sky-100 text-sky-700'],
+    ['types', 'Jenis pembayaran', 'solar:tag-price-bold-duotone', 'bg-gold-200 text-gold-600'], ['report', 'Laporan', 'solar:chart-2-bold-duotone', 'bg-violet-100 text-violet-700']
+  ];
+  let activeFilter = 'all';
+  const FILTERS = [['all', 'Semua'], ['full', 'Lunas'], ['part', 'Sebagian'], ['credit', 'Kredit'], ['due', 'Belum lunas']];
+
+  function renderHome() {
+    const h = new Date().getHours(), now = new Date();
+    $('#greeting').textContent = 'Assalamu’alaikum · ' + (h < 11 ? 'Selamat pagi' : h < 15 ? 'Selamat siang' : h < 18 ? 'Selamat sore' : 'Selamat malam');
+    const month = DB.payments.filter((p) => { const d = new Date(p.ts); return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear(); });
+    $('#totalCollected').textContent = rupiah(month.reduce((s, p) => s + p.paid, 0));
+    $('#todayInfo').textContent = '+' + rupiah(DB.payments.filter((p) => sameDay(p.ts, now)).reduce((s, p) => s + p.paid, 0)) + ' hari ini';
+    const out = DB.payments.reduce((s, p) => s + rest(p), 0);
+    $('#totalOutstanding').textContent = rupiah(out); $('#bellDot').classList.toggle('hidden', out === 0);
+    $('#statFull').textContent = DB.payments.filter((p) => statusOf(p) === 'full').length;
+    $('#statHalf').textContent = DB.payments.filter((p) => statusOf(p) === 'part').length;
+    $('#statCredit').textContent = DB.payments.filter((p) => statusOf(p) === 'credit').length;
+    $('#quickActions').innerHTML = QUICK.map(([id, l, i, t]) => `<button type="button" data-action="${id}" class="flex flex-col items-center gap-2 rounded-2xl transition active:scale-95"><span class="flex h-14 w-14 items-center justify-center rounded-2xl ${t}"><iconify-icon icon="${i}" width="28" height="28"></iconify-icon></span><span class="text-center text-[11px] font-medium leading-tight text-slate-600">${esc(l)}</span></button>`).join('');
+    const active = DB.types.filter((t) => !t.archived);
+    $('#paymentTypes').innerHTML = active.length ? active.map((t) => `<a href="#/jenis" class="w-40 shrink-0 rounded-2xl border border-forest-100 bg-white p-3.5 shadow-sm"><span class="flex h-10 w-10 items-center justify-center rounded-xl ${iconTone(t.icon)}"><iconify-icon icon="${esc(t.icon)}" width="24"></iconify-icon></span><p class="mt-3 truncate text-sm font-semibold text-forest-900">${esc(t.name)}</p><p class="text-xs font-bold text-forest-600 tnum">${rupiah(t.price)}</p></a>`).join('')
+      : `<a href="#/jenis" class="w-full rounded-2xl border border-dashed border-forest-200 p-4 text-center text-sm text-forest-700">Belum ada jenis pembayaran. <b>Tambah sekarang</b></a>`;
+    $('#filters').innerHTML = FILTERS.map(([k, l]) => `<button type="button" data-filter="${k}" aria-pressed="${activeFilter === k}" class="shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold transition ${activeFilter === k ? 'bg-forest-800 text-white' : 'border border-forest-200 bg-white text-forest-800'}">${l}</button>`).join('');
+    const list = DB.payments.filter((p) => activeFilter === 'all' || (activeFilter === 'due' ? rest(p) > 0 : statusOf(p) === activeFilter)).sort((a, b) => b.ts - a.ts);
+    $('#listCount').textContent = list.length + ' data';
+    $('#recentPayments').innerHTML = list.length ? list.map((p, i) => paymentCard(p, i)).join('') : `<div class="rounded-2xl border border-dashed border-forest-200 p-8 text-center text-sm text-slate-400"><iconify-icon icon="solar:inbox-line-bold-duotone" width="36"></iconify-icon><p class="mt-2">Belum ada pembayaran</p></div>`;
+  }
+  const hasProof = (p) => p.entries.some((e) => e.proof);
+  function paymentCard(p, i) {
+    const t = typeOf(p.typeId), s = studentOf(p.studentId), m = STATUS[statusOf(p)], r = rest(p);
+    return `<article data-bill="${esc(p.id)}" role="button" tabindex="0" aria-label="Rincian pembayaran ${esc(s.name)}, ${esc(t.name)}" class="item-in flex cursor-pointer items-center gap-3 rounded-2xl bg-white p-3.5 shadow-sm ring-1 ring-forest-100/70 transition active:scale-[.99]" style="animation-delay:${Math.min(i, 8) * 40}ms">
+      <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-100 text-sm font-bold text-forest-800">${esc(initials(s.name))}</div>
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center justify-between gap-2"><p class="truncate text-sm font-semibold text-forest-900">${esc(s.name)}</p><p class="shrink-0 text-sm font-extrabold text-forest-900 tnum">${rupiah(p.paid)}</p></div>
+        <p class="truncate text-xs text-slate-500">Kelas ${esc(s.cls)} · ${esc(t.name)} · tagihan ${rupiah(p.price)}</p>
+        <div class="mt-1.5 flex items-center justify-between gap-2"><span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${m.cls}"><iconify-icon icon="${m.icon}" width="12"></iconify-icon>${m.label}</span><span class="flex items-center gap-1.5 text-[10px] ${r ? 'font-semibold text-gold-600' : 'text-slate-400'}">${hasProof(p) ? '<iconify-icon icon="solar:camera-bold" width="12" class="text-forest-600" aria-label="Ada foto bukti"></iconify-icon>' : ''}${r ? 'Sisa ' + rupiah(r) : when(p.ts)}</span></div>
+      </div></article>`;
+  }
+
+  /* ---------- Jenis Pembayaran ---------- */
+  const typeStats = (t) => { const ps = DB.payments.filter((p) => p.typeId === t.id); return { n: ps.length, got: ps.reduce((s, p) => s + p.paid, 0), due: ps.reduce((s, p) => s + rest(p), 0) }; };
+  function typeCard(t, i) {
+    const st = typeStats(t);
+    return `<li class="item-in rounded-2xl bg-white p-4 shadow-sm ring-1 ring-forest-100/70 ${t.archived ? 'opacity-75' : ''}" style="animation-delay:${Math.min(i, 8) * 40}ms">
+      <div class="flex items-center gap-3">
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${iconTone(t.icon)}"><iconify-icon icon="${esc(t.icon)}" width="26"></iconify-icon></span>
+        <div class="min-w-0 flex-1"><p class="truncate font-display text-base font-bold text-forest-900">${esc(t.name)}</p><p class="text-sm font-extrabold text-forest-700 tnum">${rupiah(t.price)}</p></div>
+        <button type="button" data-edit-type="${esc(t.id)}" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-forest-50 text-forest-700 transition active:scale-95" aria-label="Ubah ${esc(t.name)}"><iconify-icon icon="solar:pen-bold-duotone" width="20"></iconify-icon></button>
+      </div>
+      <dl class="mt-3 grid grid-cols-3 gap-2 border-t border-forest-100 pt-3 text-center">
+        <div><dt class="text-[10px] text-slate-500">Transaksi</dt><dd class="text-sm font-bold text-forest-900 tnum">${st.n}</dd></div>
+        <div><dt class="text-[10px] text-slate-500">Terkumpul</dt><dd class="text-sm font-bold text-forest-800 tnum">${rupiah(st.got)}</dd></div>
+        <div><dt class="text-[10px] text-slate-500">Sisa tagihan</dt><dd class="text-sm font-bold ${st.due ? 'text-gold-600' : 'text-slate-400'} tnum">${rupiah(st.due)}</dd></div>
+      </dl></li>`;
+  }
+  function renderTypes() {
+    const act = DB.types.filter((t) => !t.archived), arc = DB.types.filter((t) => t.archived);
+    $('#tpActive').textContent = act.length; $('#tpCollected').textContent = rupiah(DB.payments.reduce((s, p) => s + p.paid, 0));
+    $('#typeList').innerHTML = act.length ? act.map(typeCard).join('') : `<li class="rounded-2xl border border-dashed border-forest-200 p-8 text-center text-sm text-slate-500"><iconify-icon icon="solar:tag-price-bold-duotone" width="36" class="text-forest-300"></iconify-icon><p class="mt-2 font-semibold text-forest-900">Belum ada jenis pembayaran</p><p class="mt-1">Ketuk tombol + untuk menambahkan SPP, seragam, dan lainnya.</p></li>`;
+    $('#archivedWrap').hidden = !arc.length; $('#archivedList').innerHTML = arc.map(typeCard).join('');
+  }
+
+  /* ---------- Siswa ---------- */
+  function studentTotals(s) { const ps = DB.payments.filter((p) => p.studentId === s.id); return { n: ps.length, paid: ps.reduce((a, p) => a + p.paid, 0), due: ps.reduce((a, p) => a + rest(p), 0), ps }; }
+  let stFilter = 'all';
+  const gradeOf = (c) => String(c || '').charAt(0);
+  function renderStudents() {
+    const q = $('#stSearch').value.trim().toLowerCase(), all = DB.students.map((s) => ({ s, t: studentTotals(s) }));
+    $('#stCount').textContent = all.length; $('#stDue').textContent = all.filter((x) => x.t.due > 0).length;
+    const grades = [...new Set(DB.students.map((s) => gradeOf(s.cls)).filter(Boolean))].sort();
+    if (stFilter !== 'all' && stFilter !== 'due' && !grades.includes(stFilter)) stFilter = 'all';
+    $('#stChips').innerHTML = [['all', 'Semua'], ['due', 'Punya tagihan'], ...grades.map((g) => [g, 'Kelas ' + g])].map(([k, l]) => `<button type="button" data-stchip="${k}" aria-pressed="${stFilter === k}" class="shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold transition ${stFilter === k ? 'bg-forest-800 text-white' : 'border border-forest-200 bg-white text-forest-800'}">${l}</button>`).join('');
+    const list = all.filter(({ s, t }) => (!q || (s.name + ' ' + s.cls + ' ' + s.nis).toLowerCase().includes(q)) && (stFilter === 'all' || (stFilter === 'due' ? t.due > 0 : gradeOf(s.cls) === stFilter)));
+    if (!list.length) { $('#studentList').innerHTML = `<div class="rounded-2xl border border-dashed border-forest-200 p-8 text-center text-sm text-slate-500"><iconify-icon icon="solar:users-group-rounded-bold-duotone" width="36" class="text-forest-300"></iconify-icon><p class="mt-2 font-semibold text-forest-900">${q || stFilter !== 'all' ? 'Siswa tidak ditemukan' : 'Belum ada siswa'}</p>${q || stFilter !== 'all' ? '' : '<p class="mt-1">Tambahkan satu per satu atau impor dari Excel.</p><div class="mt-4 flex justify-center gap-2"><button type="button" id="emptyAdd" class="rounded-full bg-forest-800 px-4 py-2 text-xs font-bold text-white">Tambah siswa</button><button type="button" id="emptyImport" class="rounded-full bg-white px-4 py-2 text-xs font-bold text-forest-800 ring-1 ring-forest-200">Impor Excel</button></div>'}</div>`; return; }
+    const groups = new Map();
+    list.sort((a, b) => a.s.cls.localeCompare(b.s.cls, 'id') || a.s.name.localeCompare(b.s.name, 'id')).forEach((x) => { (groups.get(x.s.cls) || groups.set(x.s.cls, []).get(x.s.cls)).push(x); });
+    $('#studentList').innerHTML = [...groups].map(([cls, items]) => `<div class="mb-5"><h2 class="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-500"><span>Kelas ${esc(cls)}</span><span class="font-semibold normal-case tracking-normal">${items.length} siswa</span></h2><ul class="space-y-2">${items.map(({ s, t }) =>
+      `<li><button type="button" data-student="${esc(s.id)}" class="flex w-full items-center gap-3 rounded-2xl bg-white p-3.5 text-left shadow-sm ring-1 ring-forest-100/70 transition active:scale-[.99]">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-100 text-sm font-bold text-forest-800">${esc(initials(s.name))}</span>
+        <span class="min-w-0 flex-1"><b class="block truncate text-sm text-forest-900">${esc(s.name)}</b><span class="block truncate text-xs text-slate-500">${s.nis ? 'NIS ' + esc(s.nis) : 'Tanpa NIS'} · ${t.n} transaksi</span></span>
+        <span class="shrink-0 text-right">${t.due ? `<span class="inline-flex items-center gap-1 rounded-full bg-gold-200 px-2 py-0.5 text-[10px] font-bold text-gold-600 tnum"><iconify-icon icon="solar:clock-circle-bold" width="11"></iconify-icon>Sisa ${rupiah(t.due)}</span>` : t.n ? `<span class="inline-flex items-center gap-1 rounded-full bg-forest-100 px-2 py-0.5 text-[10px] font-bold text-forest-800"><iconify-icon icon="solar:check-circle-bold" width="11"></iconify-icon>Lunas</span>` : `<span class="text-[10px] text-slate-400">Belum ada</span>`}</span></button></li>`).join('')}</ul></div>`).join('');
+  }
+
+
+  /* ---------- Laporan ---------- */
+  const PERIODS = [['today', 'Hari ini'], ['week', '7 hari'], ['month', 'Bulan ini'], ['all', 'Semua']];
+  let reportPeriod = 'month';
+  const periodStart = () => { const d = new Date(); d.setHours(0, 0, 0, 0); if (reportPeriod === 'week') d.setDate(d.getDate() - 6); else if (reportPeriod === 'month') d.setDate(1); else if (reportPeriod === 'all') return 0; return d.getTime(); };
+  function reportData() {
+    const from = periodStart(), inP = (ts) => ts >= from;
+    const bills = DB.payments.filter((p) => inP(p.ts)), received = [];
+    DB.payments.forEach((p) => p.entries.forEach((en) => { if (inP(en.ts)) received.push({ p, en }); }));
+    return { from, bills, received, sum: (a) => a.reduce((x, y) => x + y, 0) };
+  }
+  function renderReport() {
+    const { bills, received, sum } = reportData(), lbl = PERIODS.find((x) => x[0] === reportPeriod)[1].toLowerCase();
+    $('#rPeriod').innerHTML = PERIODS.map(([id, l]) => `<button type="button" role="tab" aria-selected="${id === reportPeriod}" data-period="${id}" class="flex-1 whitespace-nowrap rounded-xl px-3 py-2 text-xs font-bold transition ${id === reportPeriod ? 'bg-forest-800 text-white' : 'text-forest-800'}">${l}</button>`).join('');
+    const inSum = sum(received.map((x) => x.en.amount)), open = DB.payments.filter((p) => rest(p) > 0);
+    $('#rLabel').textContent = '(' + lbl + ')'; $('#rIn').textContent = rupiah(inSum);
+    $('#rInSub').textContent = received.length ? received.length + ' transaksi dari ' + new Set(received.map((x) => x.p.studentId)).size + ' siswa' : 'Belum ada penerimaan pada periode ini';
+    $('#rBill').textContent = rupiah(sum(bills.map((p) => p.price))); $('#rDue').textContent = rupiah(sum(open.map(rest)));
+    const types = {}; DB.payments.forEach((p) => { (types[p.typeId] = types[p.typeId] || { in: 0, due: 0, n: 0 }).due += rest(p); });
+    bills.forEach((p) => { (types[p.typeId] = types[p.typeId] || { in: 0, due: 0, n: 0 }).n++; });
+    received.forEach((x) => { (types[x.p.typeId] = types[x.p.typeId] || { in: 0, due: 0, n: 0 }).in += x.en.amount; });
+    const rows = Object.entries(types).sort((a, b) => b[1].in - a[1].in), max = Math.max(1, ...rows.map((r) => r[1].in));
+    $('#rTypes').innerHTML = rows.length ? rows.map(([id, v]) => { const t = typeOf(id); return `<div class="rounded-2xl bg-white p-3.5 ring-1 ring-forest-100"><div class="flex items-center justify-between gap-2"><p class="truncate text-sm font-semibold text-forest-900">${esc(t.name)}</p><p class="shrink-0 text-sm font-extrabold tnum text-forest-900">${rupiah(v.in)}</p></div><div class="mt-2 h-2 overflow-hidden rounded-full bg-forest-100" role="img" aria-label="${esc(t.name)} ${rupiah(v.in)} diterima"><div class="h-full rounded-full bg-forest-600" style="width:${Math.round(v.in / max * 100)}%"></div></div><p class="mt-1.5 text-[11px] text-slate-500">${v.n} tagihan baru · tunggakan ${rupiah(v.due)}</p></div>`; }).join('') : `<p class="rounded-2xl border border-dashed border-forest-200 p-5 text-center text-sm text-slate-500">Belum ada data.</p>`;
+    const cls = {}; const C = (c) => (cls[c] = cls[c] || { in: 0, due: 0 });
+    received.forEach((x) => { C(studentOf(x.p.studentId).cls).in += x.en.amount; }); open.forEach((p) => { C(studentOf(p.studentId).cls).due += rest(p); });
+    const cr = Object.entries(cls).sort((a, b) => a[0].localeCompare(b[0], 'id', { numeric: true }));
+    $('#rClasses').innerHTML = cr.length ? `<table class="w-full text-left text-xs"><thead class="bg-forest-50 text-[10px] uppercase tracking-wider text-slate-500"><tr><th class="px-3 py-2">Kelas</th><th class="px-3 py-2 text-right">Diterima</th><th class="px-3 py-2 text-right">Tunggakan</th></tr></thead><tbody class="divide-y divide-forest-100">${cr.map(([c, v]) => `<tr><td class="px-3 py-2.5 font-bold text-forest-900">${esc(c)}</td><td class="px-3 py-2.5 text-right tnum">${rupiah(v.in)}</td><td class="px-3 py-2.5 text-right tnum ${v.due ? 'font-semibold text-gold-600' : 'text-slate-400'}">${rupiah(v.due)}</td></tr>`).join('')}</tbody></table>` : `<p class="p-5 text-center text-sm text-slate-500">Belum ada data.</p>`;
+    $('#rOpen').innerHTML = open.length ? [...open].sort((a, b) => rest(b) - rest(a)).slice(0, 10).map((p) => `<div data-bill="${esc(p.id)}" role="button" tabindex="0" class="flex cursor-pointer items-center justify-between gap-2 rounded-2xl bg-white p-3.5 ring-1 ring-forest-100"><span class="min-w-0"><b class="block truncate text-sm text-forest-900">${esc(studentOf(p.studentId).name)}</b><span class="block truncate text-[11px] text-slate-500">Kelas ${esc(studentOf(p.studentId).cls)} · ${esc(typeOf(p.typeId).name)}</span></span><b class="shrink-0 text-sm tnum text-gold-600">${rupiah(rest(p))}</b></div>`).join('') + (open.length > 10 ? `<p class="text-center text-[11px] text-slate-500">dan ${open.length - 10} tagihan lainnya (lihat di CSV)</p>` : '') : `<p class="rounded-2xl border border-dashed border-forest-200 p-5 text-center text-sm text-slate-500">Tidak ada tunggakan. Alhamdulillah.</p>`;
+  }
+  const csvCell = (v) => { let t = String(v == null ? '' : v); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return '"' + t.replace(/"/g, '""') + '"'; };
+  $('#rExport').addEventListener('click', () => {
+    const { bills } = reportData(), head = ['Tanggal', 'Siswa', 'Kelas', 'NIS', 'Jenis', 'Tagihan', 'Dibayar', 'Sisa', 'Status', 'Jumlah cicilan'];
+    const lines = [head, ...[...bills].sort((a, b) => a.ts - b.ts).map((p) => { const s = studentOf(p.studentId); return [new Date(p.ts).toLocaleDateString('id-ID'), s.name, s.cls, s.nis, typeOf(p.typeId).name, p.price, p.paid, rest(p), STATUS[statusOf(p)].label, p.entries.length]; })];
+    const blob = new Blob(['﻿' + lines.map((r) => r.map(csvCell).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'laporan-kas-' + reportPeriod + '-' + new Date().toISOString().slice(0, 10) + '.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast(bills.length ? 'Laporan diunduh (' + bills.length + ' tagihan)' : 'Tidak ada tagihan pada periode ini');
+  });
+
+  /* ---------- Router ---------- */
+  const NAV = [['home', '#/', 'Beranda', 'solar:home-2-bold'], ['siswa', '#/siswa', 'Siswa', 'solar:users-group-rounded-bold'], ['jenis', '#/jenis', 'Jenis', 'solar:tag-price-bold'], ['laporan', '#/laporan', 'Laporan', 'solar:chart-2-bold']];
+  const FABS = { home: ['Catat pembayaran', 'pay'], jenis: ['Tambah jenis pembayaran', 'type'], siswa: ['Tambah siswa', 'student'], laporan: ['Catat pembayaran', 'pay'] };
+  let route = 'home';
+  function go() {
+    const h = location.hash.replace(/^#\/?/, '');
+    route = h === 'jenis' ? 'jenis' : h === 'siswa' ? 'siswa' : h === 'laporan' ? 'laporan' : 'home';
+    document.querySelectorAll('[data-view]').forEach((v) => { v.hidden = v.id !== 'v-' + route; });
+    $('#v-' + route).scrollTop = 0;
+    $('#fab').setAttribute('aria-label', FABS[route][0]);
+    $('#bottomNav').innerHTML = NAV.map(([id, href, l, i]) => `<li>${href ? `<a href="${href}"` : `<button type="button" data-soon="${l}"`} ${id === route ? 'aria-current="page"' : ''} ${id === 'jenis' ? 'aria-label="Jenis pembayaran"' : ''} class="relative flex w-16 flex-col items-center gap-0.5 py-1 transition ${id === route ? 'text-forest-700' : 'text-slate-400'}">${id === route ? '<span class="absolute -top-2 h-1 w-8 rounded-full bg-gold-400"></span>' : ''}<iconify-icon icon="${i}" width="26" height="26"></iconify-icon><span class="text-[10px] font-semibold">${l}</span>${href ? '</a>' : '</button>'}</li>`).join('');
+    document.title = ({ home: 'Kas Sekolah', jenis: 'Jenis Pembayaran', siswa: 'Siswa', laporan: 'Laporan' }[route]) + ' — AN-NUR';
+    refresh();
+  }
+  const refresh = () => { if (route === 'home') renderHome(); else if (route === 'jenis') renderTypes(); else if (route === 'laporan') renderReport(); else renderStudents(); };
+
+  /* ---------- Lembar ---------- */
+  const wrap = $('#sheetWrap'); let current = null, lastFocus = null;
+  function openSheet(id) {
+    if (!current) lastFocus = document.activeElement;
+    ['f-pay', 'f-type', 'f-student', 'f-detail', 'f-bill', 'f-proof', 'f-import', 'f-confirm'].forEach((f) => { $('#' + f).hidden = f !== id; });
+    current = id; wrap.classList.remove('hidden'); wrap.setAttribute('aria-hidden', 'false');
+  }
+  function closeSheet() {
+    wrap.classList.add('hidden'); wrap.setAttribute('aria-hidden', 'true'); current = null; revokeUrls();
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+  }
+  wrap.addEventListener('click', (e) => { if (e.target === wrap || e.target.closest('[data-close]')) closeSheet(); });
+  addEventListener('keydown', (e) => {
+    if (!current) return;
+    if (e.key === 'Escape') return closeSheet();
+    if (e.key === 'Tab') {
+      const f = [...$('#' + current).querySelectorAll('button, input, select')].filter((x) => !x.disabled && (x.offsetParent !== null || x.classList.contains('sr-only')));
+      if (!f.length) return;
+      const a = f[0], z = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    }
+  });
+  function confirmDialog(title, msg, yes) {
+    $('#t-confirm').textContent = title; $('#m-confirm').textContent = msg; $('#cYes').textContent = yes; const back = current;
+    openSheet('f-confirm'); $('#cNo').focus();
+    return new Promise((res) => { $('#cYes').onclick = () => res(true); $('#cNo').onclick = () => { res(false); if (back) openSheet(back); else closeSheet(); }; });
+  }
+
+  /* --- catat pembayaran ---
+     Jumlah bebas. Sama dengan tagihan = Lunas; kurang = Sebagian dan sisanya dihitung; 0 = Kredit.
+     Bila siswa dan jenis yang sama masih punya tagihan berjalan, pembayaran ditambahkan sebagai cicilan ke tagihan itu. */
+  let payTarget = null, proofBlob = null, proofUrl = null, saving = false;
+  const openBillFor = (sid, tid) => DB.payments.filter((p) => p.studentId === sid && p.typeId === tid && rest(p) > 0).sort((a, b) => b.ts - a.ts)[0] || null;
+  const payCtx = () => {
+    const t = DB.types.find((x) => x.id === $('#pType').value), sid = $('#pStudent').value, bill = payTarget || (t && sid ? openBillFor(sid, t.id) : null);
+    return { t, sid, bill, price: bill ? bill.price : (t ? t.price : 0), prev: bill ? bill.paid : 0 };
+  };
+  const amountVal = () => Number(digits($('#pAmount').value)) || 0;
+  function payCalc() {
+    const { t, bill, price, prev } = payCtx(), due = price - prev, amt = Math.min(amountVal(), 1e12), after = prev + amt;
+    $('#sumLabel').textContent = bill ? 'Sisa tagihan' : 'Tagihan'; $('#sumPrice').textContent = rupiah(due);
+    $('#sumPaid').textContent = rupiah(amt); $('#sumRest').textContent = rupiah(Math.max(due - amt, 0));
+    const st = !t ? null : price > 0 && after >= price ? 'full' : after > 0 ? 'part' : 'credit', m = st && STATUS[st];
+    $('#sumStatus').innerHTML = m ? `<span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${m.cls}"><iconify-icon icon="${m.icon}" width="11"></iconify-icon>${m.label}</span>` : '';
+    $('#pOpenNote').classList.toggle('hidden', !bill);
+    if (bill) $('#pOpenNote').textContent = 'Tagihan berjalan: sudah dibayar ' + rupiah(bill.paid) + ', sisa ' + rupiah(rest(bill)) + '. Pembayaran ini ditambahkan ke tagihan tersebut.';
+    $('#pProofReq').textContent = amt > 0 ? '· wajib' : '· tidak perlu bila jumlah 0';
+    $('#pFull').textContent = 'Bayar ' + (bill ? 'sisa' : 'lunas') + ' (' + rupiah(due) + ')';
+  }
+  function setProof(blob) {
+    if (proofUrl) { URL.revokeObjectURL(proofUrl); proofUrl = null; }
+    proofBlob = blob || null;
+    $('#pProofEmpty').hidden = !!blob; $('#pProofView').hidden = !blob;
+    if (blob) { proofUrl = URL.createObjectURL(blob); $('#pProofImg').src = proofUrl; setErr('ePProof', ''); }
+    else $('#pProofImg').removeAttribute('src');
+  }
+  function fillPayStudents(sel) {
+    const ss = [...DB.students].sort((a, b) => a.name.localeCompare(b.name, 'id'));
+    $('#pStudent').innerHTML = `<option value="">— Pilih siswa —</option>` + ss.map((s) => `<option value="${esc(s.id)}">${esc(s.name)} (${esc(s.cls)})</option>`).join('');
+    if (sel) $('#pStudent').value = sel;
+  }
+  function openPay(studentId, billId) {
+    const act = DB.types.filter((t) => !t.archived);
+    if (!DB.students.length) { toast('Tambahkan siswa terlebih dahulu'); return openStudent(null, { thenPay: true }); }
+    if (!act.length) { toast('Buat jenis pembayaran terlebih dahulu'); return openType(null); }
+    payTarget = billId ? DB.payments.find((p) => p.id === billId) || null : null;
+    fillPayStudents(payTarget ? payTarget.studentId : studentId);
+    const list = payTarget && !act.some((t) => t.id === payTarget.typeId) ? [...act, typeOf(payTarget.typeId)] : act;
+    $('#pType').innerHTML = list.map((t) => `<option value="${esc(t.id)}">${esc(t.name)} — ${rupiah(t.price)}</option>`).join('');
+    if (payTarget) $('#pType').value = payTarget.typeId;
+    $('#pStudent').disabled = $('#pType').disabled = !!payTarget; $('#pNewStudent').hidden = !!payTarget;
+    $('#t-pay').textContent = payTarget ? 'Bayar sisa tagihan' : 'Catat pembayaran';
+    ['ePStudent', 'ePType', 'ePAmount', 'ePProof'].forEach((id) => setErr(id, '')); $('#pAmount').setAttribute('aria-invalid', 'false');
+    $('#pAmount').value = ''; setProof(null); saving = false; $('#pSubmit').disabled = false;
+    payCalc(); openSheet('f-pay'); (payTarget ? $('#pAmount') : $('#pStudent')).focus();
+  }
+  $('#f-pay').addEventListener('change', (e) => { if (e.target.id === 'pStudent' || e.target.id === 'pType') payCalc(); });
+  $('#pAmount').addEventListener('input', (e) => { const raw = digits(e.target.value); e.target.value = raw && !raw.replace(/0/g, '') ? '0' : fmtPrice(raw); setErr('ePAmount', '', 'pAmount'); payCalc(); });
+  $('#pFull').addEventListener('click', () => { const { price, prev } = payCtx(); $('#pAmount').value = fmtPrice(String(price - prev)); setErr('ePAmount', '', 'pAmount'); payCalc(); });
+  $('#pNewStudent').addEventListener('click', () => openStudent(null, { thenPay: true }));
+  $('#pCam').addEventListener('click', () => $('#pFileCam').click()); $('#pPick').addEventListener('click', () => $('#pFilePick').click());
+  $('#pRetake').addEventListener('click', () => $('#pFilePick').click()); $('#pRemove').addEventListener('click', () => setProof(null));
+  ['pFileCam', 'pFilePick'].forEach((id) => $('#' + id).addEventListener('change', async (e) => {
+    const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    try { setProof(await prepareImage(f)); } catch (er) { setErr('ePProof', er.message); }
+  }));
+  $('#f-pay').addEventListener('submit', async (e) => {
+    e.preventDefault(); if (saving) return;
+    const { t, sid, bill, price, prev } = payCtx(), amt = amountVal(), due = price - prev;
+    const bad = [setErr('ePStudent', sid ? '' : 'Pilih siswa terlebih dahulu.', 'pStudent'), setErr('ePType', t ? '' : 'Pilih jenis pembayaran.', 'pType'),
+      setErr('ePAmount', !$('#pAmount').value.trim() ? 'Isi jumlah pembayaran (isi 0 bila belum membayar).' : amt > due ? 'Melebihi sisa tagihan (' + rupiah(due) + ').' : bill && amt === 0 ? 'Isi jumlah lebih dari 0.' : '', 'pAmount'),
+      setErr('ePProof', amt > 0 && !proofBlob ? 'Lampirkan foto bukti pembayaran.' : '')];
+    if (bad[0]) return $('#pStudent').focus(); if (bad[1]) return $('#pType').focus(); if (bad[2]) return $('#pAmount').focus(); if (bad[3]) return $('#pCam').focus();
+    saving = true; $('#pSubmit').disabled = true;
+    const now = Date.now(), entry = { id: uid(), amount: amt, ts: now, proof: false };
+    if (amt > 0) { const ok = await Proofs.put(entry.id, proofBlob); entry.proof = true; if (!ok) toast('Foto hanya tersimpan sementara di sesi ini'); }
+    let target = bill;
+    if (!target) { target = { id: uid(), studentId: sid, typeId: t.id, price: t.price, paid: 0, ts: now, entries: [] }; DB.payments.push(target); }
+    if (amt > 0) { target.entries.push(entry); target.paid += amt; }
+    save(); closeSheet(); activeFilter = 'all'; refresh();
+    toast(amt === 0 ? 'Dicatat sebagai kredit: ' + studentOf(sid).name : rest(target) === 0 ? 'Lunas: ' + studentOf(sid).name : 'Tersimpan. Sisa ' + rupiah(rest(target)));
+  });
+
+  /* --- rincian tagihan + foto bukti --- */
+  function openBill(id) {
+    const p = DB.payments.find((x) => x.id === id); if (!p) return;
+    const s = studentOf(p.studentId), t = typeOf(p.typeId), m = STATUS[statusOf(p)], r = rest(p);
+    $('#t-bill').textContent = s.name; $('#bSub').textContent = 'Kelas ' + s.cls + ' · ' + t.name;
+    $('#bPrice').textContent = rupiah(p.price); $('#bPaid').textContent = rupiah(p.paid); $('#bRest').textContent = rupiah(r);
+    $('#bStatus').innerHTML = `<span class="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${m.cls}"><iconify-icon icon="${m.icon}" width="14"></iconify-icon>${m.label}</span>`;
+    $('#bList').innerHTML = p.entries.length ? [...p.entries].sort((a, b) => b.ts - a.ts).map((en) =>
+      `<li class="flex items-center gap-3 rounded-xl bg-white p-3 ring-1 ring-forest-100">
+        ${en.proof ? `<button type="button" data-proof="${esc(en.id)}" class="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-forest-100 ring-1 ring-forest-200" aria-label="Lihat foto bukti ${rupiah(en.amount)}"><img alt="" data-thumb="${esc(en.id)}" class="h-full w-full object-cover" /><iconify-icon icon="solar:camera-bold" width="18" class="absolute inset-0 m-auto text-forest-600"></iconify-icon></button>`
+        : `<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-400"><iconify-icon icon="solar:camera-minimalistic-linear" width="20"></iconify-icon></span>`}
+        <span class="min-w-0 flex-1"><b class="block text-sm tnum text-forest-900">${rupiah(en.amount)}</b><span class="block text-[11px] text-slate-500">${when(en.ts)}${en.proof ? '' : ' · tanpa foto'}</span></span></li>`).join('')
+      : `<li class="rounded-xl border border-dashed border-forest-200 p-5 text-center text-sm text-slate-500">Belum ada pembayaran (kredit).</li>`;
+    $('#bPay').hidden = r === 0; $('#bPay').textContent = 'Bayar sisa tagihan (' + rupiah(r) + ')'; $('#bPay').onclick = () => openPay(null, id);
+    openSheet('f-bill');
+    p.entries.filter((en) => en.proof).forEach(async (en) => { const b = await Proofs.get(en.id), img = $(`[data-thumb="${en.id}"]`); if (b && img && current === 'f-bill') img.src = objUrl(b); else if (img && !b) img.remove(); });
+  }
+  async function openProof(entryId, billId) {
+    const p = DB.payments.find((x) => x.id === billId), en = p && p.entries.find((x) => x.id === entryId); if (!en) return;
+    const b = await Proofs.get(entryId); revokeUrls();
+    $('#prInfo').textContent = studentOf(p.studentId).name + ' · ' + typeOf(p.typeId).name + ' · ' + rupiah(en.amount) + ' · ' + when(en.ts);
+    $('#prMissing').classList.toggle('hidden', !!b); $('#prImg').hidden = !b; if (b) $('#prImg').src = objUrl(b); else $('#prImg').removeAttribute('src');
+    $('#prBack').onclick = () => openBill(billId); openSheet('f-proof');
+  }
+
+  /* --- jenis pembayaran --- */
+  let editType = null, pickedIcon = ICONS[0][0];
+  const fmtPrice = (v) => { const d = digits(v).replace(/^0+/, ''); return d ? Number(d).toLocaleString('id-ID') : ''; };
+  const priceNum = () => Number(digits($('#tPrice').value)) || 0;
+  function paintIcons() { $('#tIcons').innerHTML = ICONS.map(([ic, tone, lb]) => `<label class="cursor-pointer"><input type="radio" name="ticon" value="${ic}" class="peer sr-only" ${ic === pickedIcon ? 'checked' : ''} aria-label="${lb}"><span class="flex h-12 items-center justify-center rounded-xl border border-forest-200 bg-white peer-checked:border-forest-700 peer-checked:ring-2 peer-checked:ring-forest-700/30 peer-focus-visible:ring-2 peer-focus-visible:ring-gold-400"><span class="flex h-9 w-9 items-center justify-center rounded-lg ${tone}"><iconify-icon icon="${ic}" width="22"></iconify-icon></span></span></label>`).join(''); }
+  function openType(id) {
+    editType = id ? DB.types.find((t) => t.id === id) : null; pickedIcon = editType ? editType.icon : ICONS[0][0];
+    $('#t-type').textContent = editType ? 'Ubah jenis pembayaran' : 'Jenis pembayaran baru';
+    $('#tName').value = editType ? editType.name : ''; $('#tPrice').value = editType ? fmtPrice(String(editType.price)) : '';
+    setErr('eTName', '', 'tName'); setErr('eTPrice', '', 'tPrice'); paintIcons(); halfHint();
+    $('#tNote').classList.toggle('hidden', !(editType && typeStats(editType).n));
+    $('#tDanger').hidden = !editType;
+    if (editType) { const used = typeStats(editType).n; $('#tArchive').textContent = editType.archived ? 'Aktifkan kembali' : 'Arsipkan (sembunyikan dari pilihan)'; $('#tDelete').hidden = used > 0; }
+    openSheet('f-type'); $('#tName').focus();
+  }
+  function halfHint() { $('#tHalf').textContent = 'Harga tagihan per siswa. Siswa boleh membayar sebagian atau bertahap.'; }
+  $('#tPrice').addEventListener('input', (e) => { e.target.value = fmtPrice(e.target.value); halfHint(); });
+  $('#f-type').addEventListener('change', (e) => { if (e.target.name === 'ticon') pickedIcon = e.target.value; });
+  $('#f-type').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = $('#tName').value.trim().replace(/\s+/g, ' '), price = priceNum();
+    const dup = DB.types.some((t) => t.name.toLowerCase() === name.toLowerCase() && (!editType || t.id !== editType.id));
+    const e1 = setErr('eTName', name.length < 2 ? 'Nama minimal 2 karakter.' : dup ? 'Nama jenis pembayaran sudah ada.' : '', 'tName');
+    const e2 = setErr('eTPrice', price < 1000 ? 'Harga minimal Rp 1.000.' : price > 100000000 ? 'Harga maksimal Rp 100.000.000.' : '', 'tPrice');
+    if (e1) return $('#tName').focus(); if (e2) return $('#tPrice').focus();
+    if (editType) Object.assign(editType, { name, price, icon: pickedIcon });
+    else DB.types.push({ id: uid(), name, price, icon: pickedIcon, archived: false });
+    save(); closeSheet(); refresh(); toast(editType ? 'Jenis pembayaran diperbarui' : 'Jenis pembayaran ditambahkan');
+  });
+  $('#tArchive').addEventListener('click', () => { editType.archived = !editType.archived; save(); closeSheet(); refresh(); toast(editType.archived ? 'Diarsipkan' : 'Diaktifkan kembali'); });
+  $('#tDelete').addEventListener('click', async () => {
+    const t = editType; if (typeStats(t).n) return toast('Sudah dipakai pembayaran, gunakan arsip');
+    if (await confirmDialog('Hapus “' + t.name + '”?', 'Jenis pembayaran ini belum pernah dipakai dan akan dihapus permanen.', 'Hapus')) { DB.types = DB.types.filter((x) => x.id !== t.id); save(); closeSheet(); refresh(); toast('Jenis pembayaran dihapus'); }
+  });
+
+  /* --- siswa --- */
+  let editStudent = null, afterStudent = false;
+  function openStudent(id, opt = {}) {
+    editStudent = id ? DB.students.find((s) => s.id === id) : null; afterStudent = !!opt.thenPay;
+    $('#t-student').textContent = editStudent ? 'Ubah data siswa' : 'Siswa baru';
+    $('#sName').value = editStudent ? editStudent.name : ''; $('#sCls').value = editStudent ? editStudent.cls : ''; $('#sNis').value = editStudent ? editStudent.nis : '';
+    ['eSName', 'eSCls', 'eSNis'].forEach((x, i) => setErr(x, '', ['sName', 'sCls', 'sNis'][i]));
+    $('#sDelete').classList.toggle('hidden', !editStudent); $('#sAgain').hidden = !!editStudent || afterStudent; openSheet('f-student'); $('#sName').focus();
+  }
+  $('#f-student').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = $('#sName').value.trim().replace(/\s+/g, ' '), cls = classKey($('#sCls').value.trim()), nis = digits($('#sNis').value);
+    const dup = DB.students.some((s) => s.name.toLowerCase() === name.toLowerCase() && s.cls === cls && (!editStudent || s.id !== editStudent.id));
+    const nisDup = nis && DB.students.some((s) => s.nis === nis && (!editStudent || s.id !== editStudent.id));
+    const errs = [setErr('eSName', name.length < 3 ? 'Nama minimal 3 karakter.' : dup ? 'Siswa dengan nama dan kelas ini sudah ada.' : '', 'sName'),
+      setErr('eSCls', /^[1-6][A-Z]?$/.test(cls) ? '' : 'Contoh: 5A.', 'sCls'), setErr('eSNis', nisDup ? 'NIS sudah dipakai siswa lain.' : '', 'sNis')];
+    const first = errs.findIndex(Boolean); if (first >= 0) return $(['#sName', '#sCls', '#sNis'][first]).focus();
+    let sid;
+    if (editStudent) { Object.assign(editStudent, { name, cls, nis }); sid = editStudent.id; } else { sid = uid(); DB.students.push({ id: sid, name, cls, nis }); }
+    save(); refresh();
+    if (!editStudent && e.submitter && e.submitter.dataset.again) {
+      $('#sName').value = ''; $('#sNis').value = ''; $('#sName').focus(); toast(name + ' ditambahkan. Lanjut siswa berikutnya (kelas tetap ' + cls + ')');
+      return;
+    }
+    const pay = afterStudent; closeSheet(); toast(editStudent ? 'Data siswa diperbarui' : 'Siswa ditambahkan');
+    if (pay) setTimeout(() => openPay(sid), 50);
+  });
+  $('#sDelete').addEventListener('click', async () => {
+    const s = editStudent; if (studentTotals(s).n) return toast('Siswa punya riwayat pembayaran dan tidak bisa dihapus');
+    if (await confirmDialog('Hapus ' + s.name + '?', 'Data siswa akan dihapus permanen.', 'Hapus')) { DB.students = DB.students.filter((x) => x.id !== s.id); save(); closeSheet(); refresh(); toast('Siswa dihapus'); }
+  });
+  function openDetail(id) {
+    const s = DB.students.find((x) => x.id === id); if (!s) return; const t = studentTotals(s);
+    $('#t-detail').textContent = s.name; $('#dSub').textContent = 'Kelas ' + s.cls + (s.nis ? ' · NIS ' + s.nis : '');
+    $('#dPaid').textContent = rupiah(t.paid); $('#dRest').textContent = rupiah(t.due);
+    $('#dList').innerHTML = t.ps.length ? [...t.ps].sort((a, b) => b.ts - a.ts).map((p) => { const ty = typeOf(p.typeId), m = STATUS[statusOf(p)], r = rest(p);
+      return `<li data-bill="${esc(p.id)}" role="button" tabindex="0" class="flex cursor-pointer items-center justify-between gap-2 rounded-xl bg-white p-3 ring-1 ring-forest-100"><span class="min-w-0"><b class="block truncate text-sm text-forest-900">${esc(ty.name)}</b><span class="block text-[11px] text-slate-500">${when(p.ts)}${hasProof(p) ? ' · ada foto' : ''}</span></span><span class="shrink-0 text-right"><b class="block text-sm tnum">${rupiah(p.paid)}</b><span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${m.cls}"><iconify-icon icon="${m.icon}" width="11"></iconify-icon>${m.label}${r ? ' · sisa ' + rupiah(r) : ''}</span></span></li>`; }).join('')
+      : `<li class="rounded-xl border border-dashed border-forest-200 p-5 text-center text-sm text-slate-500">Belum ada pembayaran.</li>`;
+    $('#dEdit').onclick = () => openStudent(id); $('#dPay').onclick = () => openPay(id); openSheet('f-detail');
+  }
+
+  /* ---------- Impor siswa (.xlsx / .csv) ----------
+     Pembaca xlsx ditulis sendiri (zip + XML) tanpa pustaka luar. Semua isi sel diperlakukan sebagai teks dan divalidasi
+     dengan aturan yang sama seperti formulir siswa. Server tetap harus memvalidasi ulang bila data dikirim ke API. */
+  const MAX_FILE = 2 * 1024 * 1024, MAX_ROWS = 2000, MAX_UNZIP = 20 * 1024 * 1024;
+  const dvU16 = (d, o) => d.getUint16(o, true), dvU32 = (d, o) => d.getUint32(o, true);
+  async function inflateRaw(bytes) {
+    if (typeof DecompressionStream === 'undefined') throw new Error('Browser ini belum mendukung membaca .xlsx. Simpan sebagai CSV lalu coba lagi.');
+    const buf = await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer();
+    if (buf.byteLength > MAX_UNZIP) throw new Error('Isi berkas terlalu besar.');
+    return new Uint8Array(buf);
+  }
+  async function unzip(buf) {
+    const dv = new DataView(buf), u8 = new Uint8Array(buf), bad = () => new Error('Berkas bukan Excel (.xlsx) yang valid.');
+    let e = -1; for (let i = buf.byteLength - 22; i >= Math.max(0, buf.byteLength - 65557); i--) if (dvU32(dv, i) === 0x06054b50) { e = i; break; }
+    if (e < 0) throw bad();
+    const n = dvU16(dv, e + 10); let off = dvU32(dv, e + 16), total = 0; const out = {}, dec = new TextDecoder();
+    for (let i = 0; i < n; i++) {
+      if (off + 46 > buf.byteLength || dvU32(dv, off) !== 0x02014b50) throw bad();
+      const method = dvU16(dv, off + 10), csize = dvU32(dv, off + 20), usize = dvU32(dv, off + 24), nl = dvU16(dv, off + 28), el = dvU16(dv, off + 30), cl = dvU16(dv, off + 32), lo = dvU32(dv, off + 42);
+      const name = dec.decode(u8.subarray(off + 46, off + 46 + nl)); off += 46 + nl + el + cl;
+      if (!/^xl\/(workbook\.xml|_rels\/workbook\.xml\.rels|sharedStrings\.xml|worksheets\/[^/]+\.xml)$/.test(name)) continue;
+      total += usize; if (total > MAX_UNZIP) throw new Error('Isi berkas terlalu besar.');
+      if (lo + 30 > buf.byteLength || dvU32(dv, lo) !== 0x04034b50) throw bad();
+      const st = lo + 30 + dvU16(dv, lo + 26) + dvU16(dv, lo + 28), data = u8.subarray(st, st + csize);
+      if (method === 0) out[name] = data; else if (method === 8) out[name] = await inflateRaw(data); else throw new Error('Jenis kompresi berkas tidak didukung.');
+    }
+    return out;
+  }
+  const xmlDoc = (u8) => { const d = new DOMParser().parseFromString(new TextDecoder().decode(u8), 'application/xml'); if (d.getElementsByTagName('parsererror').length) throw new Error('Isi berkas rusak.'); return d; };
+  const tags = (n, t) => [...n.getElementsByTagNameNS('*', t)];
+  const colIdx = (ref) => { const m = /^([A-Z]+)/.exec(ref || ''); if (!m) return -1; let n = 0; for (const ch of m[1]) n = n * 26 + ch.charCodeAt(0) - 64; return n - 1; };
+  async function readXlsx(buf) {
+    const f = await unzip(buf), names = Object.keys(f);
+    let path = null;
+    if (f['xl/workbook.xml'] && f['xl/_rels/workbook.xml.rels']) {
+      const sh = tags(xmlDoc(f['xl/workbook.xml']), 'sheet')[0], rid = sh && (sh.getAttribute('r:id') || sh.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships', 'id'));
+      const rel = tags(xmlDoc(f['xl/_rels/workbook.xml.rels']), 'Relationship').find((r) => r.getAttribute('Id') === rid);
+      if (rel) { const t = rel.getAttribute('Target') || ''; path = t.startsWith('/') ? t.slice(1) : 'xl/' + t; }
+    }
+    if (!path || !f[path]) path = names.filter((n) => n.startsWith('xl/worksheets/')).sort()[0];
+    if (!path || !f[path]) throw new Error('Lembar kerja tidak ditemukan di berkas.');
+    const shared = f['xl/sharedStrings.xml'] ? tags(xmlDoc(f['xl/sharedStrings.xml']), 'si').map((si) => tags(si, 't').map((t) => t.textContent).join('')) : [];
+    const rows = [];
+    for (const row of tags(xmlDoc(f[path]), 'row')) {
+      const arr = [];
+      for (const c of tags(row, 'c')) {
+        const i = colIdx(c.getAttribute('r')); if (i < 0 || i > 50) continue;
+        const t = c.getAttribute('t'), v = tags(c, 'v')[0];
+        arr[i] = t === 's' ? (shared[+(v && v.textContent)] ?? '') : t === 'inlineStr' ? tags(c, 't').map((x) => x.textContent).join('') : v ? v.textContent : '';
+      }
+      if (arr.some((x) => String(x ?? '').trim())) rows.push(arr.map((x) => x ?? ''));
+      if (rows.length > MAX_ROWS + 6) throw new Error('Terlalu banyak baris (maks. ' + MAX_ROWS.toLocaleString('id-ID') + ').');
+    }
+    return rows;
+  }
+  function readCsv(text) {
+    text = text.replace(/^﻿/, ''); const first = text.split(/\r?\n/, 1)[0] || '';
+    const d = [';', '\t', ','].map((c) => [c, first.split(c).length]).sort((a, b) => b[1] - a[1])[0][0];
+    const rows = []; let row = [], cur = '', q = false;
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (q) { if (ch === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; }
+      else if (ch === '"') q = true; else if (ch === d) { row.push(cur); cur = ''; }
+      else if (ch === '\n' || ch === '\r') { if (ch === '\r' && text[i + 1] === '\n') i++; row.push(cur); cur = ''; if (row.some((x) => x.trim())) rows.push(row); row = []; if (rows.length > MAX_ROWS + 6) throw new Error('Terlalu banyak baris (maks. ' + MAX_ROWS.toLocaleString('id-ID') + ').'); }
+      else cur += ch;
+    }
+    row.push(cur); if (row.some((x) => x.trim())) rows.push(row);
+    return rows;
+  }
+  const HEAD = { name: ['nama', 'nama siswa', 'nama lengkap', 'name', 'siswa'], cls: ['kelas', 'class', 'rombel'], nis: ['nis', 'nisn', 'no induk', 'nomor induk', 'nis/nisn'] };
+  const normHead = (v) => String(v).toLowerCase().replace(/[^a-z/ ]/g, '').replace(/\s+/g, ' ').trim();
+  function evaluate(rows) {
+    let hi = -1, map = { name: 0, cls: 1, nis: 2 };
+    for (let r = 0; r < Math.min(rows.length, 5); r++) {
+      const m = {}; rows[r].forEach((c, i) => { const h = normHead(c); for (const k in HEAD) if (HEAD[k].includes(h) && m[k] == null) m[k] = i; });
+      if (m.name != null && m.cls != null) { hi = r; map = { name: m.name, cls: m.cls, nis: m.nis ?? -1 }; break; }
+    }
+    const data = rows.slice(hi + 1);
+    if (data.length > MAX_ROWS) throw new Error('Terlalu banyak baris (maks. ' + MAX_ROWS.toLocaleString('id-ID') + ').');
+    const seenKey = new Set(DB.students.map((s) => s.name.toLowerCase() + '|' + s.cls)), seenNis = new Set(DB.students.map((s) => s.nis).filter(Boolean));
+    return data.map((r, i) => {
+      const cell = (k) => (map[k] >= 0 ? String(r[map[k]] ?? '').trim() : '');
+      const name = cell('name').replace(/\s+/g, ' '), rawNis = cell('nis');
+      const cls = cell('cls').toUpperCase().replace(/\.0+$/, '').replace(/^KELAS\s*/, '').replace(/[\s.\-_]/g, '');
+      const row = { line: hi + 2 + i, name, cls, nis: '', status: 'new', msg: '' };
+      if (/e\+/i.test(rawNis)) { row.status = 'err'; row.msg = 'NIS terbaca sebagai angka ilmiah, ubah kolom NIS menjadi Teks.'; return row; }
+      row.nis = digits(rawNis);
+      if (name.length < 3 || name.length > 60) { row.status = 'err'; row.msg = 'Nama harus 3–60 karakter.'; }
+      else if (!/^[1-6][A-Z]?$/.test(cls)) { row.status = 'err'; row.msg = 'Kelas tidak valid (contoh: 5A).'; }
+      else if (rawNis && !row.nis) { row.status = 'err'; row.msg = 'NIS harus berupa angka.'; }
+      else if (row.nis.length > 16) { row.status = 'err'; row.msg = 'NIS maksimal 16 digit.'; }
+      else {
+        const key = name.toLowerCase() + '|' + cls;
+        if (seenKey.has(key)) { row.status = 'dup'; row.msg = 'Sudah ada (nama dan kelas sama).'; }
+        else if (row.nis && seenNis.has(row.nis)) { row.status = 'dup'; row.msg = 'NIS sudah dipakai.'; }
+        else { seenKey.add(key); if (row.nis) seenNis.add(row.nis); }
+      }
+      return row;
+    });
+  }
+  let importRows = [];
+  const IMP = { new: ['bg-forest-100 text-forest-800', 'solar:check-circle-bold', 'Baru'], dup: ['bg-gold-200 text-gold-600', 'solar:forbidden-circle-bold', 'Dilewati'], err: ['bg-red-100 text-red-700', 'solar:danger-circle-bold', 'Tidak valid'] };
+  function openImport() {
+    importRows = []; $('#iStep1').hidden = false; $('#iStep2').hidden = true; $('#iErr').classList.add('hidden'); $('#iFile').value = '';
+    openSheet('f-import'); $('#iFile').focus();
+  }
+  function showPreview(name) {
+    const c = (k) => importRows.filter((r) => r.status === k).length;
+    $('#iFileName').textContent = name + ' · ' + importRows.length + ' baris';
+    $('#iNew').textContent = c('new'); $('#iDup').textContent = c('dup'); $('#iBad').textContent = c('err');
+    const shown = [...importRows].sort((a, b) => ({ err: 0, dup: 1, new: 2 }[a.status] - { err: 0, dup: 1, new: 2 }[b.status]) || a.line - b.line).slice(0, 150);
+    $('#iList').innerHTML = shown.map((r) => { const m = IMP[r.status];
+      return `<li class="flex items-start gap-2 rounded-xl bg-white p-2.5 ring-1 ring-forest-100"><span class="mt-0.5 w-8 shrink-0 text-center text-[10px] text-slate-400 tnum">${r.line}</span><span class="min-w-0 flex-1"><b class="block truncate text-xs text-forest-900">${esc(r.name || '(kosong)')} <span class="font-normal text-slate-500">· ${esc(r.cls || '–')}${r.nis ? ' · ' + esc(r.nis) : ''}</span></b>${r.msg ? `<span class="block text-[11px] text-slate-500">${esc(r.msg)}</span>` : ''}</span><span class="inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${m[0]}"><iconify-icon icon="${m[1]}" width="11"></iconify-icon>${m[2]}</span></li>`; }).join('')
+      + (importRows.length > shown.length ? `<li class="py-2 text-center text-[11px] text-slate-500">dan ${importRows.length - shown.length} baris lainnya</li>` : '');
+    const n = c('new'); $('#iGo').disabled = n === 0; $('#iGo').textContent = n ? 'Impor ' + n.toLocaleString('id-ID') + ' siswa' : 'Tidak ada data baru';
+    $('#iStep1').hidden = true; $('#iStep2').hidden = false;
+  }
+  async function handleFile(file) {
+    const err = $('#iErr'); err.classList.add('hidden');
+    try {
+      if (!file) return;
+      if (!/\.(xlsx|csv)$/i.test(file.name)) throw new Error('Gunakan berkas .xlsx atau .csv.');
+      if (file.size > MAX_FILE) throw new Error('Ukuran berkas maksimal 2 MB.');
+      const buf = await file.arrayBuffer();
+      const rows = /\.csv$/i.test(file.name) ? readCsv(new TextDecoder().decode(buf)) : await readXlsx(buf);
+      if (!rows.length) throw new Error('Berkas kosong.');
+      importRows = evaluate(rows); if (!importRows.length) throw new Error('Tidak ada baris data di bawah judul kolom.');
+      showPreview(file.name);
+    } catch (e) { err.textContent = e.message || 'Berkas tidak bisa dibaca.'; err.classList.remove('hidden'); }
+  }
+  $('#iFile').addEventListener('change', (e) => handleFile(e.target.files[0]));
+  const drop = $('#iDrop');
+  ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('bg-forest-50'); }));
+  ['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('bg-forest-50'); }));
+  drop.addEventListener('drop', (e) => handleFile(e.dataTransfer.files[0]));
+  $('#iBack').addEventListener('click', () => { $('#iStep1').hidden = false; $('#iStep2').hidden = true; $('#iFile').value = ''; $('#iFile').focus(); });
+  $('#iGo').addEventListener('click', () => {
+    const add = importRows.filter((r) => r.status === 'new'); if (!add.length) return;
+    add.forEach((r) => DB.students.push({ id: uid(), name: r.name, cls: r.cls, nis: r.nis }));
+    save(); const skipped = importRows.length - add.length; closeSheet(); refresh(); toast(add.length + ' siswa diimpor' + (skipped ? ', ' + skipped + ' dilewati' : ''));
+  });
+
+  /* Templat .xlsx (zip tanpa kompresi, ditulis langsung di browser) */
+  const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+  const crc32 = (b) => { let c = ~0; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 255] ^ (c >>> 8); return (~c) >>> 0; };
+  function zipStore(files) {
+    const enc = new TextEncoder(), parts = [], central = []; let off = 0;
+    for (const f of files) {
+      const nb = enc.encode(f.name), len = f.data.length, crc = crc32(f.data);
+      const lh = new DataView(new ArrayBuffer(30)); lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(12, 0x21, true); lh.setUint32(14, crc, true); lh.setUint32(18, len, true); lh.setUint32(22, len, true); lh.setUint16(26, nb.length, true);
+      parts.push(new Uint8Array(lh.buffer), nb, f.data);
+      const ch = new DataView(new ArrayBuffer(46)); ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true); ch.setUint16(14, 0x21, true); ch.setUint32(16, crc, true); ch.setUint32(20, len, true); ch.setUint32(24, len, true); ch.setUint16(28, nb.length, true); ch.setUint32(42, off, true);
+      central.push(new Uint8Array(ch.buffer), nb); off += 30 + nb.length + len;
+    }
+    const cd = central.reduce((s, a) => s + a.length, 0), eo = new DataView(new ArrayBuffer(22));
+    eo.setUint32(0, 0x06054b50, true); eo.setUint16(8, files.length, true); eo.setUint16(10, files.length, true); eo.setUint32(12, cd, true); eo.setUint32(16, off, true);
+    return new Blob([...parts, ...central, new Uint8Array(eo.buffer)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  }
+  function downloadTemplate() {
+    const enc = new TextEncoder(), X = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', NS = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main', R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+    const cell = (r, v) => `<c r="${r}" t="inlineStr"><is><t>${v}</t></is></c>`;
+    const blob = zipStore([
+      { name: '[Content_Types].xml', data: enc.encode(X + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>') },
+      { name: '_rels/.rels', data: enc.encode(X + `<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="${R}/officeDocument" Target="xl/workbook.xml"/></Relationships>`) },
+      { name: 'xl/workbook.xml', data: enc.encode(X + `<workbook xmlns="${NS}" xmlns:r="${R}"><sheets><sheet name="Siswa" sheetId="1" r:id="rId1"/></sheets></workbook>`) },
+      { name: 'xl/_rels/workbook.xml.rels', data: enc.encode(X + `<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="${R}/worksheet" Target="worksheets/sheet1.xml"/></Relationships>`) },
+      { name: 'xl/worksheets/sheet1.xml', data: enc.encode(X + `<worksheet xmlns="${NS}"><cols><col min="1" max="1" width="34" customWidth="1"/><col min="2" max="2" width="10" customWidth="1"/><col min="3" max="3" width="18" customWidth="1"/></cols><sheetData><row r="1">${cell('A1', 'Nama')}${cell('B1', 'Kelas')}${cell('C1', 'NIS')}</row></sheetData></worksheet>`) }
+    ]);
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'templat-siswa.xlsx' });
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  $('#iTemplate').addEventListener('click', downloadTemplate);
+  $('#openImport').addEventListener('click', openImport);
+
+  /* ---------- Event ---------- */
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-action]');
+    if (a) { const id = a.dataset.action; if (id === 'record') openPay(); else if (id === 'student') openStudent(null); else if (id === 'types') location.hash = '#/jenis'; else if (id === 'report') location.hash = '#/laporan'; else toast('Segera hadir'); return; }
+    const rp = e.target.closest('[data-period]'); if (rp) { reportPeriod = rp.dataset.period; renderReport(); return; }
+    const f = e.target.closest('[data-filter]'); if (f) { activeFilter = f.dataset.filter; renderHome(); return; }
+    const et = e.target.closest('[data-edit-type]'); if (et) return openType(et.dataset.editType);
+    const st = e.target.closest('[data-student]'); if (st) return openDetail(st.dataset.student);
+    const pf = e.target.closest('[data-proof]'); if (pf) return openProof(pf.dataset.proof, DB.payments.find((x) => x.entries.some((en) => en.id === pf.dataset.proof)).id);
+    const bl = e.target.closest('[data-bill]'); if (bl) return openBill(bl.dataset.bill);
+    const sc = e.target.closest('[data-stchip]'); if (sc) { stFilter = sc.dataset.stchip; return renderStudents(); }
+    if (e.target.closest('#emptyImport')) return openImport();
+    if (e.target.closest('#emptyAdd') || e.target.closest('#addStudent')) return openStudent(null);
+    const so = e.target.closest('[data-soon]'); if (so) toast(so.dataset.soon + ' segera hadir');
+  });
+  document.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-bill]')) { e.preventDefault(); openBill(e.target.dataset.bill); } });
+  $('#fab').addEventListener('click', () => { const k = FABS[route][1]; if (k === 'pay') openPay(); else if (k === 'type') openType(null); else openStudent(null); });
+  $('#stSearch').addEventListener('input', renderStudents);
+  $('#bell').addEventListener('click', () => { const o = DB.payments.filter((p) => rest(p) > 0).length; toast(o ? o + ' pembayaran belum lunas' : 'Semua pembayaran lunas'); });
+  $('#viewOutstanding').addEventListener('click', () => { activeFilter = 'due'; renderHome(); $('#recent').scrollIntoView({ behavior: 'smooth' }); });
+  addEventListener('hashchange', () => { if (current) closeSheet(); go(); });
+
+  go();
+  const splash = $('#splash'); let gone = false;
+  const hide = () => { if (gone) return; gone = true; splash.classList.add('fade-out'); setTimeout(() => splash.remove(), 500); };
+  splash.addEventListener('click', hide); setTimeout(hide, 2200);
+})();
+</script>
+</body>
+</html>

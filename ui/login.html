@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12503a" />
+  <title>Masuk — Kas Sekolah AN-NUR</title>
+  <link rel="icon" href="https://www.annurifs.sch.id/wp-content/uploads/2020/09/cropped-SMALL-LOGO.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { display: ['Fraunces', 'Georgia', 'serif'], sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'], arabic: ['Amiri', 'serif'] },
+        colors: {
+          forest: { 50:'#effaf4',100:'#d8f3e3',200:'#b3e6cc',300:'#80d1ad',400:'#4ab788',500:'#269b6c',600:'#187d57',700:'#136447',800:'#12503a',900:'#0f4231',950:'#07271d' },
+          gold: { 200:'#f8e4a8',300:'#f3d27a',400:'#ecb94a',500:'#e0a026',600:'#c27f17' },
+          cream: '#fbf7ee'
+        }
+      } }
+    }
+  </script>
+  <style>
+    html, body { min-height: 100%; }
+    body { background: #efe9da; -webkit-tap-highlight-color: transparent; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    [hidden] { display: none !important; }
+    .pattern { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 6l5.5 11.5L50 14l-3.5 12.5L58 32l-11.5 5.5L50 50l-12.5-3.5L32 58l-5.5-11.5L14 50l3.5-12.5L6 32l11.5-5.5L14 14l12.5 3.5z' fill='none' stroke='%23ffffff' stroke-opacity='.09' stroke-width='1.2'/%3E%3C/svg%3E"); }
+    .field { width: 100%; height: 3.25rem; border-radius: 1rem; background: #fff; border: 1.5px solid #b3e6cc; padding: 0 1rem; font-size: 15px; outline: none; transition: border-color .15s, box-shadow .15s; }
+    .field:focus { border-color: #187d57; box-shadow: 0 0 0 4px rgba(24,125,87,.15); }
+    .field[aria-invalid="true"] { border-color: #dc2626; }
+    :focus-visible { outline: 3px solid #ecb94a; outline-offset: 2px; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .rise { animation: rise .5s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+    .shake { animation: shake .35s; }
+    @keyframes spin { to { transform: rotate(360deg); } } .spin { animation: spin .8s linear infinite; }
+    @media (prefers-reduced-motion: reduce) { .rise, .shake, .spin { animation: none !important; } }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+  <main class="mx-auto flex min-h-screen w-full max-w-[430px] flex-col bg-cream shadow-2xl sm:my-0">
+    <header class="relative overflow-hidden rounded-b-[40px] bg-gradient-to-br from-forest-700 to-forest-950 px-6 pb-24 pt-12 text-white">
+      <div class="pattern pointer-events-none absolute inset-0"></div>
+      <div class="relative flex flex-col items-center text-center">
+        <div class="flex h-20 w-20 items-center justify-center rounded-3xl bg-white p-2 shadow-xl shadow-black/20"><img src="https://www.annurifs.sch.id/wp-content/uploads/2020/09/cropped-SMALL-LOGO.png" alt="Logo AN-NUR" class="h-full w-full object-contain" /></div>
+        <p class="font-arabic mt-5 text-2xl text-gold-300" lang="ar" dir="rtl">السلام عليكم</p>
+        <h1 class="font-display mt-1 text-2xl font-bold leading-tight">Kas Sekolah</h1>
+        <p class="mt-1 text-xs text-white/70">AN-NUR Islamic Fullday School</p>
+      </div>
+    </header>
+
+    <section class="rise relative z-10 -mt-14 flex-1 px-5 pb-8" aria-labelledby="t-login">
+      <div class="rounded-3xl bg-white p-6 shadow-xl shadow-forest-900/10 ring-1 ring-forest-100">
+        <h2 id="t-login" class="font-display text-xl font-bold text-forest-900">Masuk</h2>
+        <p class="mt-1 text-sm text-slate-500">Khusus petugas keuangan dan admin sekolah.</p>
+
+        <div id="alert" role="alert" class="mt-4 hidden rounded-xl px-4 py-3 text-sm font-semibold"></div>
+
+        <form id="form" class="mt-5 space-y-4" novalidate>
+          <div>
+            <label for="user" class="text-xs font-bold text-forest-900">Email atau nama pengguna</label>
+            <input id="user" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" inputmode="email" placeholder="bendahara@annurifs.sch.id" class="field mt-1" aria-describedby="eUser" />
+            <p id="eUser" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+          </div>
+          <div>
+            <div class="flex items-center justify-between"><label for="pass" class="text-xs font-bold text-forest-900">Kata sandi</label><button type="button" id="forgot" class="text-xs font-bold text-forest-600">Lupa kata sandi?</button></div>
+            <div class="relative mt-1">
+              <input id="pass" name="password" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi" class="field !pr-12" aria-describedby="ePass capsNote" />
+              <button type="button" id="toggle" class="absolute right-1.5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl text-slate-500" aria-label="Tampilkan kata sandi" aria-pressed="false"><iconify-icon id="eye" icon="solar:eye-linear" width="22"></iconify-icon></button>
+            </div>
+            <p id="capsNote" class="mt-1 hidden text-xs font-semibold text-gold-600">Caps Lock sedang aktif.</p>
+            <p id="ePass" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+          </div>
+          <label class="flex cursor-pointer items-center gap-2.5 text-sm text-slate-600"><input id="remember" type="checkbox" class="h-4 w-4 rounded border-forest-300 accent-[#187d57]" />Ingat saya di perangkat ini</label>
+          <button id="submit" type="submit" class="flex h-[3.25rem] w-full items-center justify-center gap-2 rounded-2xl bg-forest-800 text-sm font-bold text-white transition active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-60">
+            <iconify-icon id="spin" icon="solar:refresh-linear" width="20" class="spin" hidden></iconify-icon><span id="submitLbl">Masuk</span>
+          </button>
+        </form>
+
+        <div id="demoNote" class="mt-5 hidden rounded-xl border border-gold-300 bg-gold-200/40 p-3 text-xs leading-relaxed text-forest-900"><b>Mode demo.</b> Belum terhubung ke server, jadi akun tidak diperiksa dan isian apa pun diterima. Setel <code class="font-bold">CONFIG.demo = false</code> dan hubungkan <code class="font-bold">api</code> untuk produksi.</div>
+      </div>
+      <p class="mt-5 text-center text-xs text-slate-500">Kesulitan masuk? Hubungi admin sekolah.</p>
+    </section>
+  </main>
+
+  <!-- Lupa kata sandi -->
+  <div id="fWrap" class="fixed inset-0 z-50 hidden items-end justify-center bg-forest-950/60 sm:items-center" aria-hidden="true">
+    <form id="fForm" class="rise max-h-[92%] w-full max-w-[430px] overflow-y-auto rounded-t-[28px] bg-cream p-5 sm:rounded-3xl" role="dialog" aria-modal="true" aria-labelledby="t-forgot" novalidate>
+      <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200"></div>
+      <div class="flex items-center justify-between"><h2 id="t-forgot" class="font-display text-xl font-bold text-forest-900">Atur ulang kata sandi</h2><button type="button" data-fclose class="flex h-9 w-9 items-center justify-center rounded-full bg-white ring-1 ring-forest-100" aria-label="Tutup"><iconify-icon icon="solar:close-circle-bold" width="22"></iconify-icon></button></div>
+      <div id="fBody">
+        <p class="mt-2 text-sm text-slate-600">Masukkan email akun Anda. Jika terdaftar, tautan pengaturan ulang akan dikirim.</p>
+        <label for="fEmail" class="mt-4 block text-xs font-bold text-forest-900">Email</label>
+        <input id="fEmail" type="email" autocomplete="email" placeholder="nama@annurifs.sch.id" class="field mt-1" aria-describedby="eFEmail" />
+        <p id="eFEmail" class="mt-1 hidden text-xs font-semibold text-red-600"></p>
+        <button type="submit" id="fSubmit" class="mt-5 h-[3.25rem] w-full rounded-2xl bg-forest-800 text-sm font-bold text-white disabled:opacity-60">Kirim tautan</button>
+      </div>
+      <div id="fDone" class="mt-4 hidden rounded-2xl bg-forest-100 p-4 text-sm text-forest-900" role="status">Jika email terdaftar, tautan pengaturan ulang sudah dikirim. Periksa kotak masuk dan folder spam.</div>
+    </form>
+  </div>
+
+<script>
+(() => {
+  'use strict';
+  /* demo:true  → tidak ada request ke server (hanya untuk melihat tampilan).
+     Produksi: setel demo:false. Validasi akun dan pembatasan percobaan HARUS di server;
+     penguncian di sini hanya kenyamanan tampilan. Server sebaiknya mengatur cookie sesi HttpOnly. */
+  const CONFIG = { demo: true, api: '/api', redirectTo: 'kas-sekolah.html', maxAttempts: 5, lockSeconds: 30 };
+  const $ = (s) => document.querySelector(s);
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  let fails = 0, lockTimer = null, busy = false;
+
+  if (CONFIG.demo) $('#demoNote').classList.remove('hidden');
+  try { const u = localStorage.getItem('annur_kas_user'); if (u) { $('#user').value = u; $('#remember').checked = true; } } catch {}
+
+  const setErr = (id, msg, input) => { const el = $('#' + id); el.textContent = msg; el.classList.toggle('hidden', !msg); if (input) $('#' + input).setAttribute('aria-invalid', msg ? 'true' : 'false'); return !!msg; };
+  const alertBox = (kind, msg) => { const a = $('#alert'); a.textContent = msg; a.className = 'mt-4 rounded-xl px-4 py-3 text-sm font-semibold ' + (kind === 'ok' ? 'bg-forest-100 text-forest-800' : 'bg-red-50 text-red-700'); if (kind !== 'ok') { a.classList.remove('shake'); void a.offsetWidth; a.classList.add('shake'); } };
+  const clearAlert = () => $('#alert').classList.add('hidden');
+  const loading = (on) => { busy = on; $('#submit').disabled = on; $('#spin').hidden = !on; $('#submitLbl').textContent = on ? 'Memeriksa…' : 'Masuk'; };
+
+  $('#toggle').addEventListener('click', () => {
+    const show = $('#pass').type === 'password'; $('#pass').type = show ? 'text' : 'password';
+    $('#toggle').setAttribute('aria-pressed', String(show)); $('#toggle').setAttribute('aria-label', show ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi');
+    $('#eye').setAttribute('icon', show ? 'solar:eye-closed-linear' : 'solar:eye-linear');
+  });
+  $('#pass').addEventListener('keyup', (e) => { if (e.getModifierState) $('#capsNote').classList.toggle('hidden', !e.getModifierState('CapsLock')); });
+  $('#pass').addEventListener('blur', () => $('#capsNote').classList.add('hidden'));
+  $('#user').addEventListener('input', () => setErr('eUser', '', 'user'));
+  $('#pass').addEventListener('input', () => setErr('ePass', '', 'pass'));
+
+  function lock() {
+    let left = CONFIG.lockSeconds; $('#submit').disabled = true;
+    clearInterval(lockTimer);
+    const tick = () => { if (left <= 0) { clearInterval(lockTimer); fails = 0; $('#submit').disabled = false; $('#submitLbl').textContent = 'Masuk'; clearAlert(); return; } $('#submitLbl').textContent = 'Coba lagi dalam ' + left + ' dtk'; left--; };
+    tick(); lockTimer = setInterval(tick, 1000);
+  }
+
+  async function authenticate(username, password) {
+    if (CONFIG.demo) { await sleep(900); return { ok: true }; }
+    try {
+      const r = await fetch(CONFIG.api + '/auth/login', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+      return { ok: r.ok, status: r.status };
+    } catch { return { ok: false, network: true }; }
+  }
+
+  $('#form').addEventListener('submit', async (e) => {
+    e.preventDefault(); if (busy || $('#submitLbl').textContent.startsWith('Coba lagi')) return;
+    clearAlert();
+    const username = $('#user').value.trim(), password = $('#pass').value;
+    const bad = [setErr('eUser', username ? '' : 'Isi email atau nama pengguna.', 'user'), setErr('ePass', password ? '' : 'Isi kata sandi.', 'pass')];
+    if (bad[0]) return $('#user').focus(); if (bad[1]) return $('#pass').focus();
+    loading(true);
+    const res = await authenticate(username, password);
+    if (res.ok) {
+      try { if ($('#remember').checked) localStorage.setItem('annur_kas_user', username); else localStorage.removeItem('annur_kas_user'); } catch {}
+      alertBox('ok', CONFIG.demo ? 'Masuk (demo). Mengalihkan…' : 'Berhasil masuk. Mengalihkan…'); $('#alert').classList.remove('hidden');
+      await sleep(600); location.href = CONFIG.redirectTo; return;
+    }
+    loading(false);
+    fails++;
+    alertBox('err', res.network ? 'Tidak bisa terhubung ke server. Periksa koneksi lalu coba lagi.' : res.status === 429 ? 'Terlalu banyak percobaan. Tunggu sebentar.' : 'Email/nama pengguna atau kata sandi salah.');
+    $('#alert').classList.remove('hidden'); $('#pass').value = ''; $('#pass').focus();
+    if (!res.network && (fails >= CONFIG.maxAttempts || res.status === 429)) lock();
+  });
+
+  /* Lupa kata sandi */
+  const wrap = $('#fWrap'); let opener = null;
+  const closeF = () => { wrap.classList.add('hidden'); wrap.classList.remove('flex'); wrap.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; opener && opener.focus(); };
+  $('#forgot').addEventListener('click', (e) => {
+    opener = e.currentTarget; $('#fEmail').value = $('#user').value.includes('@') ? $('#user').value.trim() : ''; setErr('eFEmail', '', 'fEmail');
+    $('#fBody').hidden = false; $('#fDone').classList.add('hidden'); $('#fSubmit').disabled = false;
+    wrap.classList.remove('hidden'); wrap.classList.add('flex'); wrap.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; $('#fEmail').focus();
+  });
+  wrap.addEventListener('click', (e) => { if (e.target === wrap || e.target.closest('[data-fclose]')) closeF(); });
+  document.addEventListener('keydown', (e) => {
+    if (wrap.classList.contains('hidden')) return;
+    if (e.key === 'Escape') return closeF();
+    if (e.key === 'Tab') { const f = [...wrap.querySelectorAll('button,input')].filter((x) => !x.disabled && x.offsetParent), a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
+  });
+  $('#fForm').addEventListener('submit', async (e) => {
+    e.preventDefault(); const em = $('#fEmail').value.trim();
+    if (setErr('eFEmail', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em) ? '' : 'Masukkan alamat email yang valid.', 'fEmail')) return $('#fEmail').focus();
+    $('#fSubmit').disabled = true;
+    if (CONFIG.demo) await sleep(700); else { try { await fetch(CONFIG.api + '/auth/forgot-password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: em }) }); } catch {} }
+    $('#fBody').hidden = true; $('#fDone').classList.remove('hidden');
+  });
+})();
+</script>
+</body>
+</html>
