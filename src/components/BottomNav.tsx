@@ -1,7 +1,6 @@
 import { View, Text, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { NEUTRALS, type TenantTheme } from "../theme/tenant";
-import { useI18n } from "../helpers/i18n";
 import { Icon, type IconName } from "./Icon";
 
 // The app's global navigation. Module screens render the same bar and differ only
@@ -15,25 +14,25 @@ export const NAV_ITEMS: {
   // The record tab floats half over the bar, so the bar must not clip it.
   floating?: boolean;
 }[] = [
-  { id: "Home", icon: "home-2-bold", label: "Home", size: 28 },
+  { id: "Home", icon: "home-2-bold", label: "Beranda", size: 28 },
   {
     id: "Students",
     icon: "users-group-rounded-bold",
-    label: "Students",
+    label: "Siswa",
     size: 28,
   },
   {
     id: "Record",
     icon: "add-circle-bold",
-    label: "Record",
+    label: "Catat",
     size: 56,
     floating: true,
   },
-  { id: "Report", icon: "chart-2-bold", label: "Report", size: 28 },
+  { id: "Report", icon: "chart-2-bold", label: "Laporan", size: 28 },
   {
     id: "Profile",
-    icon: "wallet-money-bold-duotone",
-    label: "Profile",
+    icon: "users-group-rounded-bold",
+    label: "Profil",
     size: 28,
   },
 ];
@@ -49,21 +48,21 @@ interface BottomNavProps {
   theme: TenantTheme;
 }
 
-export function BottomNav({ activeId, onSelect, theme }: BottomNavProps) {
+export function BottomNav({ activeId, onSelect }: BottomNavProps) {
   const insets = useSafeAreaInsets();
-  const { t } = useI18n();
   return (
     <View
       className="bg-white flex-row items-stretch"
       // overflow:visible so the floating icon can rise above the bar
-      style={{ paddingBottom: Math.max(insets.bottom, 8), overflow: "visible", zIndex: 10 }}
+      style={{
+        paddingBottom: Math.max(insets.bottom, 8),
+        overflow: "visible",
+        zIndex: 10,
+      }}
     >
       {NAV_ITEMS.map((item) => {
         const active = item.id === activeId;
-        const label =
-          item.id === "Profile"
-            ? theme.navLabel
-            : t(`${item.id.toLowerCase()}.title`);
+        const label = item.label;
         const tint = active ? NEUTRALS.forest700 : NEUTRALS.slate400;
         const icon = (
           <Icon

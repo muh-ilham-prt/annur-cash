@@ -14,7 +14,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { TENANTS, TENANT, NEUTRALS } from "../../theme/tenant";
 import { Icon } from "../../components/Icon";
 import { MasjidPattern } from "../../components/MasjidPattern";
-import { useI18n } from "../../helpers/i18n";
 import { getRememberedUser, setRememberedUser, signIn } from "../../helpers/auth";
 
 interface LoginScreenProps {
@@ -23,7 +22,6 @@ interface LoginScreenProps {
 
 export default function LoginScreen({ onSubmit }: LoginScreenProps) {
   const theme = TENANTS[TENANT];
-  const { t } = useI18n();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -48,7 +46,7 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
     const missing = { user: !user, pass: !password };
     setInvalid(missing);
     if (missing.user || missing.pass) {
-      setError(t("auth.required"));
+      setError("Masukkan email/username dan kata sandi");
       return;
     }
     setError(null);
@@ -57,7 +55,7 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
     if (!ok) {
       setSubmitting(false);
       setPassword("");
-      setError(t("auth.wrong"));
+      setError("Email/username atau kata sandi salah");
       return;
     }
     await setRememberedUser(remember ? user : null);
@@ -100,8 +98,8 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
             className="relative z-10 -mt-14 px-5 pb-8"
           >
             <View className="rounded-3xl bg-white p-6 ring-1 ring-forest-100">
-              <Text className="text-forest-900 text-xl font-extrabold">{t("auth.title")}</Text>
-              <Text className="mt-1 text-[14px] text-slate-500">{t("auth.hint")}</Text>
+              <Text className="text-forest-900 text-xl font-extrabold">{"Masuk"}</Text>
+              <Text className="mt-1 text-[14px] text-slate-500">{"Khusus petugas keuangan dan admin sekolah."}</Text>
 
               {error && (
                 <View className="mt-4 flex-row items-center gap-2 rounded-xl bg-rose-100 px-4 py-3" accessibilityRole="alert">
@@ -112,7 +110,7 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
                 </View>
               )}
 
-              <Text className="mt-5 text-[12px] font-bold text-forest-900">{t("auth.identifier")}</Text>
+              <Text className="mt-5 text-[12px] font-bold text-forest-900">{"Email atau username"}</Text>
               <TextInput
                 value={identifier}
                 onChangeText={(value) => {
@@ -125,7 +123,7 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
                 autoCorrect={false}
                 keyboardType="email-address"
                 textContentType="username"
-                accessibilityLabel={t("auth.identifier")}
+                accessibilityLabel={"Email atau username"}
                 accessibilityState={{ disabled: submitting }}
                 className={`mt-1 h-[52px] rounded-2xl border bg-white px-4 text-[15px] text-ink ${
                   invalid.user ? "border-danger" : "border-forest-200"
@@ -133,8 +131,8 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
               />
 
               <View className="mt-4 flex-row items-center justify-between">
-                <Text className="text-[12px] font-bold text-forest-900">{t("auth.password")}</Text>
-                <Text className="text-[12px] font-bold text-forest-600">{t("auth.forgot")}</Text>
+                <Text className="text-[12px] font-bold text-forest-900">{"Kata sandi"}</Text>
+                <Text className="text-[12px] font-bold text-forest-600">{"Lupa kata sandi?"}</Text>
               </View>
               <View className={`mt-1 flex-row items-center rounded-2xl border bg-white pr-1.5 ${
                 invalid.pass ? "border-danger" : "border-forest-200"
@@ -145,20 +143,20 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
                     setPassword(value);
                     setInvalid((v) => ({ ...v, pass: false }));
                   }}
-                  placeholder={t("auth.passwordPlaceholder")}
+                  placeholder={"Masukkan kata sandi"}
                   placeholderTextColor={NEUTRALS.placeholder}
                   secureTextEntry={!showPassword}
                   autoCapitalize="none"
                   autoCorrect={false}
                   textContentType="password"
-                  accessibilityLabel={t("auth.password")}
+                  accessibilityLabel={"Kata sandi"}
                   accessibilityState={{ disabled: submitting }}
                   className="h-[52px] flex-1 px-4 text-[15px] text-ink"
                 />
                 <Pressable
                   onPress={() => setShowPassword((v) => !v)}
                   accessibilityRole="button"
-                  accessibilityLabel={showPassword ? t("auth.hidePassword") : t("auth.showPassword")}
+                  accessibilityLabel={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
                   accessibilityState={{ selected: showPassword }}
                   className="h-10 w-10 items-center justify-center rounded-xl"
                 >
@@ -170,7 +168,7 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
                 onPress={() => setRemember((v) => !v)}
                 accessibilityRole="checkbox"
                 accessibilityState={{ checked: remember }}
-                accessibilityLabel={t("auth.remember")}
+                accessibilityLabel={"Ingat saya di perangkat ini"}
                 className="mt-4 flex-row items-center gap-2.5"
               >
                 <View
@@ -180,7 +178,7 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
                 >
                   {remember && <Icon name="check-circle-bold" size={12} color="#fff" />}
                 </View>
-                <Text className="text-[14px] text-slate-600">{t("auth.remember")}</Text>
+                <Text className="text-[14px] text-slate-600">{"Ingat saya di perangkat ini"}</Text>
               </Pressable>
 
               <Pressable
@@ -193,12 +191,12 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
               >
                 {submitting && <Icon name="refresh-linear" size={20} color="#fff" />}
                 <Text className="text-[14px] font-bold text-white">
-                  {submitting ? t("auth.submitting") : t("auth.submit")}
+                  {submitting ? "Memeriksa…" : "Masuk"}
                 </Text>
               </Pressable>
             </View>
 
-            <Text className="mt-5 mb-6 text-center text-[12px] text-slate-500">{t("auth.help")}</Text>
+            <Text className="mt-5 mb-6 text-center text-[12px] text-slate-500">{"Kesulitan masuk? Hubungi admin sekolah."}</Text>
           </Animated.View>
         </ScrollView>
       </KeyboardAvoidingView>

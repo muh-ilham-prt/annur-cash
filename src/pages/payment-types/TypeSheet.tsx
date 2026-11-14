@@ -12,8 +12,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Icon } from "../../components/Icon";
-import { useI18n } from "../../helpers/i18n";
-import { newId, TYPE_ICONS, type PaymentType } from "../../helpers/db";
+import { newId, TYPE_ICONS, type PaymentType } from "../../helpers/domain";
 import type { TenantTheme } from "../../theme/tenant";
 
 interface TypeSheetProps {
@@ -49,7 +48,6 @@ export function TypeSheet({
   onDelete,
 }: TypeSheetProps) {
   const insets = useSafeAreaInsets();
-  const { t } = useI18n();
   const [name, setName] = useState(value?.name ?? "");
   const [price, setPrice] = useState(
     value ? groupDigits(String(value.price)) : "",
@@ -69,28 +67,34 @@ export function TypeSheet({
     const next = {
       name:
         clean.length < 2
-          ? t("paymentTypes.errName")
+          ? "paymentTypes.errName"
           : duplicate
-            ? t("paymentTypes.errDuplicate")
+            ? "paymentTypes.errDuplicate"
             : undefined,
       price:
         amount < MIN_PRICE
-          ? t("paymentTypes.errPriceMin")
+          ? "paymentTypes.errPriceMin"
           : amount > MAX_PRICE
-            ? t("paymentTypes.errPriceMax")
+            ? "paymentTypes.errPriceMax"
             : undefined,
     };
     setErrors(next);
     if (next.name || next.price) return;
 
     setSaving(true);
-    await onSave({
-      id: value?.id ?? newId(),
-      name: clean,
-      price: amount,
-      icon,
-      archived: value?.archived ?? false,
-    });
+    try {
+      await onSave({
+        id: value?.id ?? newId(),
+        name: clean,
+        price: amount,
+        icon,
+        archived: value?.archived ?? false,
+      });
+    } catch (e) {
+      setErrors({ name: e instanceof Error ? e.message : "paymentTypes.errName" });
+      setSaving(false);
+      return;
+    }
     setSaving(false);
     onClose();
   };
@@ -102,16 +106,16 @@ export function TypeSheet({
       onClose();
     };
     if (Platform.OS === "web") {
-      if (globalThis.confirm?.(t("paymentTypes.deleteConfirm", { name: value.name })))
+      if (globalThis.confirm?.("paymentTypes.deleteConfirm"))
         run();
       return;
     }
     Alert.alert(
-      t("paymentTypes.deleteTitle", { name: value.name }),
-      t("paymentTypes.deleteBody"),
+      "paymentTypes.deleteTitle",
+      "paymentTypes.deleteBody",
       [
-        { text: t("common.cancel"), style: "cancel" },
-        { text: t("paymentTypes.delete"), style: "destructive", onPress: run },
+        { text: "common.cancel", style: "cancel" },
+        { text: "paymentTypes.delete", style: "destructive", onPress: run },
       ],
     );
   };
@@ -132,7 +136,7 @@ export function TypeSheet({
         <Pressable
           className="flex-1"
           onPress={onClose}
-          accessibilityLabel={t("paymentTypes.close")}
+          accessibilityLabel={"paymentTypes.close"}
         />
         <View
           className="bg-cream rounded-t-[28px]"
@@ -152,12 +156,12 @@ export function TypeSheet({
             <View className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-forest-200" />
             <View className="flex-row items-center gap-4">
               <Text className="flex-1 text-forest-900 text-xl font-bold">
-                {value ? t("paymentTypes.sheetEdit") : t("paymentTypes.sheetNew")}
+                {value ? "paymentTypes.sheetEdit" : "paymentTypes.sheetNew"}
               </Text>
               <Pressable
                 onPress={onClose}
                 accessibilityRole="button"
-                accessibilityLabel={t("paymentTypes.close")}
+                accessibilityLabel={"paymentTypes.close"}
                 hitSlop={12}
                 className="h-8 w-8 items-center justify-center rounded-full bg-[#136447] border border-forest-100"
               >
@@ -166,7 +170,7 @@ export function TypeSheet({
             </View>
 
             <Text className="mt-4 text-xs font-bold text-forest-900">
-              {t("paymentTypes.name")}
+              {"paymentTypes.name"}
             </Text>
             <TextInput
               value={name}
@@ -177,10 +181,10 @@ export function TypeSheet({
               }}
               maxLength={40}
               autoFocus
-              placeholder={t("paymentTypes.namePlaceholder")}
+              placeholder={"paymentTypes.namePlaceholder"}
               placeholderTextColor="#94a3b8"
               autoCorrect={false}
-              accessibilityLabel={t("paymentTypes.name")}
+              accessibilityLabel={"paymentTypes.name"}
               className={field}
               style={border(errors.name)}
             />
@@ -191,7 +195,7 @@ export function TypeSheet({
             )}
 
             <Text className="mt-4 text-xs font-bold text-forest-900">
-              {t("paymentTypes.price")}
+              {"paymentTypes.price"}
             </Text>
             <View
               className="mt-1 flex-row items-center rounded-xl border bg-white"
@@ -211,12 +215,12 @@ export function TypeSheet({
                 inputMode="numeric"
                 placeholder="350.000"
                 placeholderTextColor="#94a3b8"
-                accessibilityLabel={t("paymentTypes.price")}
+                accessibilityLabel={"paymentTypes.price"}
                 className="flex-1 py-3 pr-3.5 text-[15px] text-forest-900"
               />
             </View>
             <Text className="mt-1 text-[11px] text-slate-500">
-              {t("paymentTypes.priceHint")}
+              {"paymentTypes.priceHint"}
             </Text>
             {errors.price && (
               <Text className="mt-1 text-xs font-semibold text-danger">
@@ -225,7 +229,7 @@ export function TypeSheet({
             )}
 
             <Text className="mt-4 text-xs font-bold text-forest-900">
-              {t("paymentTypes.icon")}
+              {"paymentTypes.icon"}
             </Text>
             <View className="mt-1 flex-row flex-wrap gap-2">
               {TYPE_ICONS.map((tone) => {
@@ -256,7 +260,7 @@ export function TypeSheet({
 
             {used > 0 && (
               <Text className="mt-4 rounded-xl bg-gold-200 p-3 text-xs text-forest-900">
-                {t("paymentTypes.priceNote")}
+                {"paymentTypes.priceNote"}
               </Text>
             )}
 
@@ -271,7 +275,7 @@ export function TypeSheet({
               }}
             >
               <Text className="text-sm font-bold text-white">
-                {saving ? t("common.loading") : t("common.save")}
+                {saving ? "common.loading" : "common.save"}
               </Text>
             </Pressable>
 
@@ -286,8 +290,8 @@ export function TypeSheet({
                 >
                   <Text className="text-sm font-bold text-forest-800">
                     {value.archived
-                      ? t("paymentTypes.restoreAction")
-                      : t("paymentTypes.archiveAction")}
+                      ? "paymentTypes.restoreAction"
+                      : "paymentTypes.archiveAction"}
                   </Text>
                 </Pressable>
                 {used === 0 && (
@@ -296,7 +300,7 @@ export function TypeSheet({
                     className="w-full items-center rounded-2xl bg-white py-3 border border-forest-100"
                   >
                     <Text className="text-sm font-bold text-danger">
-                      {t("paymentTypes.delete")}
+                      {"paymentTypes.delete"}
                     </Text>
                   </Pressable>
                 )}

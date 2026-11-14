@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { Icon } from "../../../components/Icon";
-import { useI18n } from "../../../helpers/i18n";
 import { formatRupiah } from "../../../helpers/money";
 
 export type PaymentStatus = "full" | "part" | "credit";
@@ -35,7 +34,6 @@ const initials = (name: string) =>
     .toUpperCase();
 
 export function RecentPayments({ payments, onPressItem }: { payments: PaymentItem[]; onPressItem?: (p: PaymentItem) => void }) {
-  const { t } = useI18n();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("all");
   const visible = payments.filter((p) => {
     if (filter === "all") return true;
@@ -46,9 +44,9 @@ export function RecentPayments({ payments, onPressItem }: { payments: PaymentIte
   return (
     <View className="mt-6 px-5">
       <View className="mb-3 flex-row items-center justify-between">
-        <Text className="text-forest-900 text-[14px] font-bold">{t("home.recent")}</Text>
+        <Text className="text-forest-900 text-[14px] font-bold">Pembayaran terbaru</Text>
         <Text className="text-forest-600 text-[12px] font-semibold">
-          {visible.length} {t("home.records")}
+          {visible.length} transaksi
         </Text>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, marginBottom: 12 }}>
@@ -63,7 +61,7 @@ export function RecentPayments({ payments, onPressItem }: { payments: PaymentIte
               className={`rounded-full px-4 py-1.5 border ${active ? "bg-forest-800 border-forest-800" : "bg-white border-forest-200"}`}
             >
               <Text className={`text-[12px] font-semibold ${active ? "text-white" : "text-forest-800"}`}>
-                {t(`home.filter.${key}`)}
+                {key === "all" ? "Semua" : key === "full" ? "Lunas" : key === "part" ? "Sebagian" : key === "credit" ? "Kredit" : "Belum lunas"}
               </Text>
             </Pressable>
           );
@@ -93,17 +91,17 @@ export function RecentPayments({ payments, onPressItem }: { payments: PaymentIte
                   <Text className="text-forest-900 text-[14px] font-extrabold">{formatRupiah(payment.paid)}</Text>
                 </View>
                 <Text className="text-[12px] text-slate-500" numberOfLines={1}>
-                  {t("home.class")} {payment.cls} · {payment.type} · {t("home.bill")} {formatRupiah(payment.price)}
+                  Kelas {payment.cls} · {payment.type} · Tagihan {formatRupiah(payment.price)}
                 </Text>
                 <View className="mt-1.5 flex-row items-center justify-between gap-2">
                   <View className="flex-row items-center gap-1 rounded-full px-2 py-0.5" style={{ backgroundColor: meta.bg }}>
                     <Icon name={meta.icon} size={12} color={meta.text} />
                     <Text className="text-[10px] font-bold" style={{ color: meta.text }}>
-                      {t(`home.status.${status}`)}
+                      {status === "full" ? "Lunas" : status === "part" ? "Sebagian" : "Kredit"}
                     </Text>
                   </View>
                   <Text className={`text-[10px] ${rest ? "font-semibold text-gold-600" : "text-slate-400"}`}>
-                    {rest ? `${t("home.remaining")} ${formatRupiah(rest)}` : payment.when}
+                    {rest ? `Sisa ${formatRupiah(rest)}` : payment.when}
                   </Text>
                 </View>
               </View>
@@ -113,7 +111,7 @@ export function RecentPayments({ payments, onPressItem }: { payments: PaymentIte
         {visible.length === 0 && (
           <View className="items-center rounded-2xl border border-dashed border-forest-200 p-8">
             <Icon name="inbox-line-bold-duotone" size={36} color="#80d1ad" />
-            <Text className="mt-2 text-slate-400 text-[14px]">{t("home.empty")}</Text>
+            <Text className="mt-2 text-slate-400 text-[14px]">Belum ada pembayaran</Text>
           </View>
         )}
       </View>

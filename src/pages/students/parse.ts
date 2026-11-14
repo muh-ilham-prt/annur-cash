@@ -1,11 +1,11 @@
 import * as XLSX from "xlsx";
-import type { Student } from "../../helpers/db";
+import type { Student } from "../../helpers/domain";
 
 export type Row = { line: number; name: string; cls: string; nis: string; status: "new" | "dup" | "err"; msg: string };
 
 export const MAX_FILE = 2 * 1024 * 1024;
 export const MAX_ROWS = 2000;
-const CLASS_RE = /^[1-6][A-Z]?$/;
+const CLASS_RE = /^(1[0-2]|[1-9])[A-Z]?$/;
 const HEAD: Record<"name" | "cls" | "nis", string[]> = { name: ["nama", "nama siswa", "nama lengkap", "name", "siswa"], cls: ["kelas", "class", "rombel"], nis: ["nis", "nisn", "no induk", "nomor induk", "nis/nisn"] };
 
 // xlsx reads .xlsx, .xls and .csv alike.

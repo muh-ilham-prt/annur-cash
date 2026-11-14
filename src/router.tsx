@@ -11,6 +11,10 @@ import ReportScreen from "./pages/report";
 import ProfileScreen from "./pages/profile";
 import AboutScreen from "./pages/about";
 import { TENANTS, TENANT, type Tenant, type TenantTheme } from "./theme/tenant";
+import { fetchCurrentUser, signOut, type CurrentUser } from "./helpers/auth";
+import { useEffect, useState } from "react";
+import { EditProfileSheet } from "./pages/profile/EditProfileSheet";
+import { ChangePasswordSheet } from "./pages/profile/ChangePasswordSheet";
 
 // The five menu destinations share one mounted bar; only the tab content swaps.
 export type MainTabParamList = {
@@ -42,7 +46,8 @@ function AppTabBar({ state, navigation, theme }: BottomTabBarProps & { theme: Te
     <BottomNav
       activeId={active}
       theme={theme}
-      onSelect={(id) => navigation.navigate(id)}
+      // Record must name its root screen, else the tab reopens whichever stack screen (Types) was last shown.
+      onSelect={(id) => (id === "Record" ? navigation.navigate("Record", { screen: "Catat" }) : navigation.navigate(id))}
     />
   );
 }
@@ -63,6 +68,10 @@ function CatatFlow() {
 type MainTabsProps = { tenant: Tenant; onLogout: () => void; onAbout: () => void };
 
 function MainTabs({ tenant, onLogout, onAbout }: MainTabsProps) {
+  const [user, setUser] = useState<CurrentUser | null>(null);
+  const [editing, setEditing] = useState(false);
+  const [changingPassword, setChangingPassword] = useState(false);
+  useEffect(() => { void fetchCurrentUser().then(setUser); }, []);
   return (
     <Tab.Navigator
       screenOptions={{ headerShown: false }}
@@ -71,7 +80,7 @@ function MainTabs({ tenant, onLogout, onAbout }: MainTabsProps) {
       <Tab.Screen name="Home">
         {({ navigation }) => (
           <HomeScreen
-            onPressNav={(id) => (id === "Types" ? navigation.navigate("Record", { screen: "Types" }) : navigation.navigate(id))}
+            onPressNav={(id) => (id === "Types" ? navigation.navigate("Record", { screen: "Types" }) : id === "Record" ? navigation.navigate("Record", { screen: "Catat" }) : navigation.navigate(id))}
           />
         )}
       </Tab.Screen>
@@ -80,22 +89,30 @@ function MainTabs({ tenant, onLogout, onAbout }: MainTabsProps) {
       <Tab.Screen name="Report">{() => <ReportScreen />}</Tab.Screen>
       <Tab.Screen name="Profile">
         {() => (
-          <ProfileScreen
-            onLogout={onLogout}
-            onChangePassword={() => {}}
-            onEditProfile={() => {}}
-            onAbout={onAbout}
-          />
+          <>
+            <ProfileScreen
+              onLogout={onLogout}
+              onChangePassword={() => setChangingPassword(true)}
+              onEditProfile={() => setEditing(true)}
+              onAbout={onAbout}
+              user={user}
+            />
+            {changingPassword && (
+              <ChangePasswordSheet onClose={() => setChangingPassword(false)} onSaved={() => {}} />
+            )}
+            {/* profile editor */}
+            {editing && user && <EditProfileSheet user={user} onClose={() => setEditing(false)} onSaved={setUser} />}
+          </>
         )}
       </Tab.Screen>
     </Tab.Navigator>
   );
 }
 
-export default function Router() {
+export default function Router({ authenticated = false }: { authenticated?: boolean }) {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName={authenticated ? "Main" : "Login"} screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login">
           {({ navigation }) => (
             <LoginScreen
@@ -111,7 +128,7 @@ export default function Router() {
             <MainTabs
               tenant={TENANT}
               onAbout={() => navigation.navigate("About")}
-              onLogout={() => navigation.reset({ index: 0, routes: [{ name: "Login" }] })}
+              onLogout={() => void signOut().finally(() => navigation.reset({ index: 0, routes: [{ name: "Login" }] }))}
             />
           )}
         </Stack.Screen>

@@ -1,6 +1,5 @@
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { Icon, type IconName } from "../../../components/Icon";
-import { useI18n } from "../../../helpers/i18n";
 import { formatRupiah } from "../../../helpers/money";
 
 interface PaymentTypeCard {
@@ -13,13 +12,12 @@ interface PaymentTypeCard {
 }
 
 export function PaymentTypesRail({ types, onManage }: { types: PaymentTypeCard[]; onManage?: () => void }) {
-  const { t } = useI18n();
   return (
     <View className="mt-6">
       <View className="mb-3 flex-row items-center justify-between px-5">
-        <Text className="text-forest-900 text-[14px] font-bold">{t("home.paymentTypes")}</Text>
+        <Text className="text-forest-900 text-[14px] font-bold">Jenis pembayaran</Text>
         <Pressable onPress={onManage} accessibilityRole="link" className="flex-row items-center gap-1">
-          <Text className="text-forest-600 text-[12px] font-semibold">{t("home.manage")}</Text>
+          <Text className="text-forest-600 text-[12px] font-semibold">Kelola</Text>
           <Icon name="alt-arrow-right-linear" size={14} color="#187d57" />
         </Pressable>
       </View>
@@ -38,7 +36,7 @@ export function PaymentTypesRail({ types, onManage }: { types: PaymentTypeCard[]
         {types.length === 0 && (
           <Pressable onPress={onManage} className="w-full rounded-2xl border border-dashed border-forest-200 p-4">
             <Text className="text-center text-forest-700 text-[14px]">
-              {t("home.noTypes")} <Text className="font-bold">{t("home.addNow")}</Text>
+              Belum ada jenis pembayaran. <Text className="font-bold">Tambah sekarang</Text>
             </Text>
           </Pressable>
         )}

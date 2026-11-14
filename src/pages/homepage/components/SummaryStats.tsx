@@ -1,6 +1,5 @@
 import { Text, View } from "react-native";
 import { Icon, type IconName } from "../../../components/Icon";
-import { useI18n } from "../../../helpers/i18n";
 
 const TILES: { key: "full" | "part" | "credit"; icon: IconName; iconBg: string; iconColor: string }[] = [
   { key: "full", icon: "check-circle-bold", iconBg: "#d8f3e3", iconColor: "#136447" },
@@ -9,7 +8,6 @@ const TILES: { key: "full" | "part" | "credit"; icon: IconName; iconBg: string; 
 ];
 
 export function SummaryStats({ stats }: { stats: Record<"full" | "part" | "credit", number> }) {
-  const { t } = useI18n();
   return (
     <View className="-mt-16 flex-row gap-3 px-5">
       {TILES.map((tile) => (
@@ -18,7 +16,7 @@ export function SummaryStats({ stats }: { stats: Record<"full" | "part" | "credi
             <Icon name={tile.icon} size={20} color={tile.iconColor} />
           </View>
           <Text className="mt-2 text-forest-900 text-[18px] font-extrabold">{stats[tile.key]}</Text>
-          <Text className="text-[11px] text-slate-500">{t(`home.status.${tile.key}`)}</Text>
+          <Text className="text-[11px] text-slate-500">{tile.key === "full" ? "Lunas" : tile.key === "part" ? "Sebagian" : "Kredit"}</Text>
         </View>
       ))}
     </View>

@@ -1,21 +1,26 @@
 import "./global.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { I18nProvider } from "./src/helpers/i18n";
 import { Splash } from "./src/components/Splash";
 import Router from "./src/router";
+import { getToken } from "./src/helpers/auth";
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
   const [entered, setEntered] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    void getToken().then((token) => setAuthenticated(Boolean(token)));
+  }, []);
+
   return (
     <SafeAreaProvider>
-      <I18nProvider>
         <View style={styles.root}>
           <StatusBar style="light" />
-          {entered && <Router />}
+          {entered && <Router authenticated={authenticated} />}
           {!splashDone && (
             <Splash
               onDone={() => {
@@ -25,7 +30,6 @@ export default function App() {
             />
           )}
         </View>
-      </I18nProvider>
     </SafeAreaProvider>
   );
 }
