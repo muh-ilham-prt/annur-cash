@@ -1,7 +1,21 @@
 import * as SecureStore from "expo-secure-store";
+import { Platform } from "react-native";
 
 export const API_URL = (process.env.EXPO_PUBLIC_API_URL ?? "").replace(/\/$/, "");
 const TOKEN_KEY = "authToken";
+
+// Web: expo-secure-store's native-only API breaks in SDK 58, use localStorage instead.
+const tokenStore = Platform.OS === "web"
+  ? {
+      get: () => Promise.resolve(window.localStorage.getItem(TOKEN_KEY)),
+      set: (v: string) => Promise.resolve(window.localStorage.setItem(TOKEN_KEY, v)),
+      del: () => Promise.resolve(window.localStorage.removeItem(TOKEN_KEY)),
+    }
+  : {
+      get: () => SecureStore.getItemAsync(TOKEN_KEY),
+      set: (v: string) => SecureStore.setItemAsync(TOKEN_KEY, v),
+      del: () => SecureStore.deleteItemAsync(TOKEN_KEY),
+    };
 
 export class ApiError extends Error {
   constructor(public status: number, message: string) {
@@ -11,7 +25,7 @@ export class ApiError extends Error {
 
 export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
   if (!API_URL) throw new ApiError(0, "API URL is not configured.");
-  const token = await SecureStore.getItemAsync(TOKEN_KEY);
+  const token = await tokenStore.get();
   const response = await fetch(`${API_URL}/${path.replace(/^\//, "")}`, {
     ...options,
     headers: {
@@ -29,6 +43,6 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}): Prom
   return data as T;
 }
 
-export const getToken = () => SecureStore.getItemAsync(TOKEN_KEY);
-export const saveToken = (token: string) => SecureStore.setItemAsync(TOKEN_KEY, token);
-export const clearToken = () => SecureStore.deleteItemAsync(TOKEN_KEY);
+export const getToken = () => tokenStore.get();
+export const saveToken = (token: string) => tokenStore.set(token);
+export const clearToken = () => tokenStore.del();

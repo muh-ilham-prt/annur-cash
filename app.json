@@ -17,7 +17,7 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "id.sch.annurifs.kas"
+      "package": "com.codeprime.annur"
     },
     "web": {
       "favicon": "./assets/favicon.png"
