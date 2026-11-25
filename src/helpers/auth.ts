@@ -13,7 +13,10 @@ export async function signIn(identifier: string, password: string) {
     });
     await saveToken(response.token);
     return response.user;
-  } catch {
+  } catch (error) {
+    console.log("[login] failed:", error);
+    (globalThis as Record<string, unknown>).__loginDetail =
+      error instanceof Error ? error.message : String(error);
     return null;
   }
 }

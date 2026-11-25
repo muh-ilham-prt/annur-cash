@@ -1,9 +1,9 @@
 import { apiFetch } from "./api";
 import type { Student } from "./domain";
 
-type Row = { id: number; name: string; cls: string | null; nis: string | null; status?: "active" | "candidate"; ppdb_id?: string | null };
-const toStudent = (r: Row): Student => ({ id: String(r.id), name: r.name, cls: r.cls ?? "", nis: r.nis ?? "", status: r.status ?? "active", ppdbId: r.ppdb_id ?? undefined });
-const body = (s: Pick<Student, "name" | "cls" | "nis">) => JSON.stringify({ name: s.name, cls: s.cls, nis: s.nis || null });
+type Row = { id: number; name: string; cls: string | null; nis: string | null; status?: "active" | "candidate"; ppdb_id?: string | null; code?: string | null; qr_svg?: string | null };
+const toStudent = (r: Row): Student => ({ id: String(r.id), name: r.name, cls: r.cls ?? "", nis: r.nis ?? "", status: r.status ?? "active", ppdbId: r.ppdb_id ?? undefined, code: r.code ?? undefined, qrSvg: r.qr_svg ?? undefined });
+const body = (s: Pick<Student, "name" | "cls" | "nis" | "code">) => JSON.stringify({ name: s.name, cls: s.cls, nis: s.nis || null, code: s.code || null });
 
 export async function fetchStudents() {
   const all: Student[] = [];

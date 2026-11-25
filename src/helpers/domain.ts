@@ -29,6 +29,8 @@ export interface Student {
   nis: string;
   status?: "active" | "candidate";
   ppdbId?: string;
+  code?: string;
+  qrSvg?: string;
 }
 
 export interface TypeStat {

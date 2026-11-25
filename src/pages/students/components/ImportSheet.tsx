@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { ActivityIndicator, Modal, Pressable, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, Modal, Platform, Pressable, ScrollView, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as DocumentPicker from "expo-document-picker";
+import * as FileSystem from "expo-file-system/legacy";
 import { Icon } from "../../../components/Icon";
 import { newId, type Student } from "../../../helpers/domain";
 import type { TenantTheme } from "../../../theme/tenant";
-import { evaluate, MAX_FILE, readSheet, type Row } from "../parse";
+import { evaluate, MAX_FILE, readSheet, templateWorkbook, type Row } from "../parse";
 
 interface ImportSheetProps {
   theme: TenantTheme;
@@ -53,6 +54,8 @@ export function ImportSheet({ theme, existing, onClose, onImport }: ImportSheetP
         longNis: "NIS terlalu panjang",
         dup: "Data siswa duplikat",
         dupNis: "NIS duplikat",
+        badCode: "Kode 6–32 huruf/angka",
+        dupCode: "Kode duplikat",
       });
       if (parsed.length === 0) throw new Error("File kosong");
       setRows(parsed);
@@ -69,10 +72,29 @@ export function ImportSheet({ theme, existing, onClose, onImport }: ImportSheetP
     const add = rows.filter((r) => r.status === "new");
     if (!add.length) return;
     onImport(
-      add.map((r) => ({ id: newId(), name: r.name, cls: r.cls, nis: r.nis })),
+      add.map((r) => ({ id: newId(), name: r.name, cls: r.cls, nis: r.nis, code: r.code || undefined })),
       rows.length - add.length,
     );
     onClose();
+  };
+
+  const downloadTemplate = async () => {
+    const bytes = templateWorkbook();
+    const name = "template-impor-siswa.xlsx";
+    if (Platform.OS === "web") {
+      const url = URL.createObjectURL(new Blob([bytes.buffer as ArrayBuffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name;
+      a.click();
+      URL.revokeObjectURL(url);
+      return;
+    }
+    // ponytail: no expo-sharing — write to cache and hand the file URI to the OS share sheet.
+    const path = `${FileSystem.cacheDirectory}${name}`;
+    await FileSystem.writeAsStringAsync(path, btoa(String.fromCharCode(...bytes)), { encoding: FileSystem.EncodingType.Base64 });
+    const Sharing = (await import("expo-sharing")).default;
+    await Sharing.shareAsync(path, { mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
   };
 
   const count = (status: Row["status"]) => rows?.filter((r) => r.status === status).length ?? 0;
@@ -121,6 +143,15 @@ export function ImportSheet({ theme, existing, onClose, onImport }: ImportSheetP
                     <Text className="text-[12px] text-forest-900">{"Kolom NIS"}</Text>
                   </View>
                 </View>
+                <Pressable
+                  onPress={() => void downloadTemplate()}
+                  accessibilityRole="button"
+                  accessibilityLabel={"Unduh template"}
+                  className="mt-3 w-full flex-row items-center justify-center gap-2 rounded-2xl bg-white py-3 border border-forest-200"
+                >
+                  <Icon name="download-minimalistic-bold" size={16} color="#136447" />
+                  <Text className="text-sm font-bold text-forest-800">{"Unduh template Excel"}</Text>
+                </Pressable>
                 {error !== "" && <Text className="mt-3 text-xs font-semibold text-danger">{error}</Text>}
               </>
             ) : (

@@ -1,7 +1,8 @@
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
 
-export const API_URL = (process.env.EXPO_PUBLIC_API_URL ?? "").replace(/\/$/, "");
+// ponytail: hardcoded fallback so a missing EAS env var can never brick login again; keep the env var as the override.
+export const API_URL = (process.env.EXPO_PUBLIC_API_URL ?? "https://cash.annurifs.sch.id/api").replace(/\/$/, "");
 const TOKEN_KEY = "authToken";
 
 // Web: expo-secure-store's native-only API breaks in SDK 58, use localStorage instead.
@@ -24,7 +25,9 @@ export class ApiError extends Error {
 }
 
 export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
-  if (!API_URL) throw new ApiError(0, "API URL is not configured.");
+  if (!API_URL) {
+    throw new ApiError(0, `API URL is not configured (env=${JSON.stringify(process.env.EXPO_PUBLIC_API_URL)})`);
+  }
   const token = await tokenStore.get();
   const response = await fetch(`${API_URL}/${path.replace(/^\//, "")}`, {
     ...options,

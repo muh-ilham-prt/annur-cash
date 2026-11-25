@@ -55,7 +55,9 @@ export default function LoginScreen({ onSubmit }: LoginScreenProps) {
     if (!ok) {
       setSubmitting(false);
       setPassword("");
-      setError("Email/username atau kata sandi salah");
+      // ponytail: temporary debug readout so the release build shows the real failure; remove once login works.
+      const detail = (globalThis as Record<string, unknown>).__loginDetail as string | undefined;
+      setError(`Email/username atau kata sandi salah${detail ? ` (${detail})` : ""}`);
       return;
     }
     await setRememberedUser(remember ? user : null);

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Pressable, RefreshControl, ScrollView, Text, TextInput, View } from "react-native";
+import { Image, Pressable, RefreshControl, ScrollView, Text, TextInput, View } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
@@ -197,9 +197,13 @@ export default function StudentsPage() {
               accessibilityLabel={"Edit siswa" + " " + student.name}
               className="flex-row items-center gap-3 rounded-2xl bg-white p-3.5 border border-forest-100"
             >
-              <View className="h-11 w-11 items-center justify-center rounded-full bg-forest-100">
-                <Text className="text-forest-800 text-[14px] font-bold">{initials(student.name)}</Text>
-              </View>
+              {student.qrSvg ? (
+                <Image source={{ uri: student.qrSvg }} className="h-11 w-11 rounded-lg" accessibilityLabel={"QR" + " " + student.name} />
+              ) : (
+                <View className="h-11 w-11 items-center justify-center rounded-full bg-forest-100">
+                  <Text className="text-forest-800 text-[14px] font-bold">{initials(student.name)}</Text>
+                </View>
+              )}
               <View className="flex-1">
                 <View className="flex-row items-center gap-2">
                   <Text className="flex-1 text-forest-900 text-[14px] font-bold" numberOfLines={1}>

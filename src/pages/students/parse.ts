@@ -1,12 +1,12 @@
 import * as XLSX from "xlsx";
 import type { Student } from "../../helpers/domain";
 
-export type Row = { line: number; name: string; cls: string; nis: string; status: "new" | "dup" | "err"; msg: string };
+export type Row = { line: number; name: string; cls: string; nis: string; code: string; status: "new" | "dup" | "err"; msg: string };
 
 export const MAX_FILE = 2 * 1024 * 1024;
 export const MAX_ROWS = 2000;
 const CLASS_RE = /^(1[0-2]|[1-9])[A-Z]?$/;
-const HEAD: Record<"name" | "cls" | "nis", string[]> = { name: ["nama", "nama siswa", "nama lengkap", "name", "siswa"], cls: ["kelas", "class", "rombel"], nis: ["nis", "nisn", "no induk", "nomor induk", "nis/nisn"] };
+const HEAD: Record<"name" | "cls" | "nis" | "code", string[]> = { name: ["nama", "nama siswa", "nama lengkap", "name", "siswa"], cls: ["kelas", "class", "rombel"], nis: ["nis", "nisn", "no induk", "nomor induk", "nis/nisn"], code: ["kode", "kode siswa", "code"] };
 
 // xlsx reads .xlsx, .xls and .csv alike.
 export function readSheet(bytes: Uint8Array): unknown[][] {
@@ -15,12 +15,20 @@ export function readSheet(bytes: Uint8Array): unknown[][] {
   return sheet ? XLSX.utils.sheet_to_json(sheet, { header: 1, raw: true, blankrows: false }) : [];
 }
 
+/** Blank .xlsx template with the exact headers the importer looks for. */
+export function templateWorkbook(): Uint8Array {
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([["Nama", "Kelas", "NIS", "Kode"]]), "Siswa");
+  const out = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+  return out instanceof Uint8Array ? out : new Uint8Array(out);
+}
+
 const normHead = (v: unknown) => String(v ?? "").toLowerCase().replace(/[^a-z/ ]/g, "").replace(/\s+/g, " ").trim();
 
 /** Validates every data row against the StudentSheet rules; duplicates in the file count too. */
 export function evaluate(rows: unknown[][], existing: Student[], msg: Record<string, string>): Row[] {
   let hi = -1;
-  let map = { name: 0, cls: 1, nis: 2 };
+  let map = { name: 0, cls: 1, nis: 2, code: -1 };
   for (let r = 0; r < Math.min(rows.length, 5); r++) {
     const m: Partial<Record<keyof typeof HEAD, number>> = {};
     rows[r].forEach((c, i) => {
@@ -29,7 +37,7 @@ export function evaluate(rows: unknown[][], existing: Student[], msg: Record<str
     });
     if (m.name != null && m.cls != null) {
       hi = r;
-      map = { name: m.name!, cls: m.cls!, nis: m.nis ?? -1 };
+      map = { name: m.name!, cls: m.cls!, nis: m.nis ?? -1, code: m.code ?? -1 };
       break;
     }
   }
@@ -37,12 +45,15 @@ export function evaluate(rows: unknown[][], existing: Student[], msg: Record<str
   if (data.length > MAX_ROWS) throw new Error(msg.tooMany);
   const seenKey = new Set(existing.map((s) => s.name.toLowerCase() + "|" + s.cls));
   const seenNis = new Set(existing.map((s) => s.nis).filter(Boolean));
+  const seenCode = new Set(existing.map((s) => s.code).filter(Boolean));
   return data.map((r, i) => {
     const cell = (k: keyof typeof map) => (map[k] >= 0 ? String(r[map[k]] ?? "").trim() : "");
     const name = cell("name").replace(/\s+/g, " ");
     const rawNis = cell("nis");
     const cls = cell("cls").toUpperCase().replace(/\.0+$/, "").replace(/^KELAS\s*/, "").replace(/[\s.\-_]/g, "");
-    const row: Row = { line: hi + 2 + i, name, cls, nis: "", status: "new", msg: "" };
+    const code = cell("code");
+    const row: Row = { line: hi + 2 + i, name, cls, nis: "", code: "", status: "new", msg: "" };
+    if (code) row.code = code;
     if (/e\+/i.test(rawNis)) return { ...row, status: "err", msg: msg.nisSci };
     row.nis = rawNis.replace(/\D/g, "");
     const key = name.toLowerCase() + "|" + cls;
@@ -52,8 +63,13 @@ export function evaluate(rows: unknown[][], existing: Student[], msg: Record<str
     if (row.nis.length > 16) return { ...row, status: "err", msg: msg.longNis };
     if (seenKey.has(key)) return { ...row, status: "dup", msg: msg.dup };
     if (row.nis && seenNis.has(row.nis)) return { ...row, status: "dup", msg: msg.dupNis };
+    if (row.code) {
+      if (!/^[A-Z0-9]{6,32}$/.test(row.code)) return { ...row, status: "err", msg: msg.badCode };
+      if (seenCode.has(row.code)) return { ...row, status: "dup", msg: msg.dupCode };
+    }
     seenKey.add(key);
     if (row.nis) seenNis.add(row.nis);
+    if (row.code) seenCode.add(row.code);
     return row;
   });
 }

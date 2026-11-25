@@ -28,13 +28,17 @@ interface StudentSheetProps {
 }
 
 const CLASS_RE = /^(1[0-2]|[1-9])[A-Z]?$/;
+const CODE_RE = /^[A-Z0-9]{6,32}$/;
+const CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const generateCode = () => Array.from({ length: 10 }, () => CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)]).join("");
 
 export function StudentSheet({ theme, value, existing, used = 0, onClose, onSave, onDelete }: StudentSheetProps) {
   const insets = useSafeAreaInsets();
   const [name, setName] = useState(value?.name ?? "");
   const [cls, setCls] = useState(value?.cls ?? "");
   const [nis, setNis] = useState(value?.nis ?? "");
-  const [errors, setErrors] = useState<{ name?: string; cls?: string; nis?: string }>({});
+  const [code, setCode] = useState(value?.code ?? "");
+  const [errors, setErrors] = useState<{ name?: string; cls?: string; nis?: string; code?: string }>({});
   const [saving, setSaving] = useState(false);
 
   const submit = async (again = false) => {
@@ -53,13 +57,19 @@ export function StudentSheet({ theme, value, existing, used = 0, onClose, onSave
         nisKey && existing.some((s) => s.nis === nisKey && s.id !== value?.id)
           ? "NIS duplikat"
           : undefined,
+      code:
+        code && !CODE_RE.test(code)
+          ? "Kode 6–32 huruf/angka"
+          : code && existing.some((s) => s.code === code && s.id !== value?.id)
+            ? "Kode duplikat"
+            : undefined,
     };
     setErrors(next);
-    if (next.name || next.cls || next.nis) return;
+    if (next.name || next.cls || next.nis || next.code) return;
 
     setSaving(true);
     try {
-      await onSave({ id: value?.id ?? newId(), name: clean, cls: classKey, nis: nisKey });
+      await onSave({ id: value?.id ?? newId(), name: clean, cls: classKey, nis: nisKey, code: code || undefined });
     } catch (e) {
       setErrors({ name: e instanceof Error ? e.message : "Nama siswa tidak valid" });
       setSaving(false);
@@ -183,6 +193,38 @@ export function StudentSheet({ theme, value, existing, used = 0, onClose, onSave
             {(errors.cls || errors.nis) && (
               <Text className="mt-1 text-xs font-semibold text-danger">{errors.cls ?? errors.nis}</Text>
             )}
+
+            <Text className="mt-4 text-xs font-bold text-forest-900">{"Kode siswa (opsional)"}</Text>
+            <View className="mt-1 flex-row gap-2">
+              <TextInput
+                value={code}
+                onChangeText={(text) => {
+                  setCode(text.toUpperCase().replace(/[^A-Z0-9]/g, ""));
+                  if (errors.code) setErrors((prev) => ({ ...prev, code: undefined }));
+                }}
+                maxLength={32}
+                autoCapitalize="characters"
+                autoCorrect={false}
+                placeholder="Otomatis jika kosong"
+                placeholderTextColor="#94a3b8"
+                accessibilityLabel={"Kode siswa"}
+                className={`flex-1 ${field}`}
+                style={border(errors.code)}
+              />
+              <Pressable
+                onPress={() => {
+                  setCode(generateCode());
+                  if (errors.code) setErrors((prev) => ({ ...prev, code: undefined }));
+                }}
+                accessibilityRole="button"
+                accessibilityLabel={"Generate kode"}
+                className="items-center justify-center rounded-xl px-4"
+                style={{ backgroundColor: theme.brand900 }}
+              >
+                <Text className="text-sm font-bold text-white">{"Generate"}</Text>
+              </Pressable>
+            </View>
+            {errors.code && <Text className="mt-1 text-xs font-semibold text-danger">{errors.code}</Text>}
 
             <Pressable
               onPress={() => void submit()}
